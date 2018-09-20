@@ -1,3 +1,8 @@
+function setLoader(element) {
+    element.append($('<div class="loader"></div>'));
+}
+
+
 function LoadAjaxData() {
     var searchString = $('#searchString').val();
     $.ajax(
