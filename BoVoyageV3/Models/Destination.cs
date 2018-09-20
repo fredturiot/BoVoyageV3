@@ -13,17 +13,17 @@ namespace BoVoyageV3.Models
 
 		[Required]
 		[Index("IX_ContinentPaysRegion", 1, IsUnique = true)]
-		[StringLength(40, MinimumLength = 5, ErrorMessage = "Le nom du continent doit avoir de 5 a 40 caracteres")]
+		[StringLength(40, MinimumLength = 3, ErrorMessage = "Le nom du continent doit avoir de 3 a 40 caracteres")]
 		public string Continent { get; set; }
 
 		[Required]
 		[Index("IX_ContinentPaysRegion", 2, IsUnique = true)]
-		[StringLength(40, MinimumLength = 2, ErrorMessage = "Le nom du pays doit avoir de 2 a 40 caracteres")]
+		[StringLength(40, MinimumLength = 3, ErrorMessage = "Le nom du pays doit avoir de 3 a 40 caracteres")]
 		public string Pays { get; set; }
 
 		[Required]
 		[Index("IX_ContinentPaysRegion", 3, IsUnique = true)]
-		[StringLength(40, MinimumLength = 3, ErrorMessage = "Le nom de la region doit avoir de 3 a 60 caracteres")]
+		[StringLength(40, MinimumLength = 3, ErrorMessage = "Le nom de la region doit avoir de 3 a 40 caracteres")]
 		public string Region { get; set; }
 
 		public string Description { get; set; }
