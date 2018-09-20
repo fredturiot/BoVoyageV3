@@ -43,6 +43,11 @@ namespace BoVoyageV3.Migrations
 				new Voyage() { ID = 7, DateAller = DateTime.Parse("2018/10/15"), DateRetour = DateTime.Parse("2018/11/05"), PlacesDisponibles = 350, PrixParPersonne = 1000.0m, AgenceVoyageID = 2, DestinationID = 2 },
 				new Voyage() { ID = 8, DateAller = DateTime.Parse("2018/12/01"), DateRetour = DateTime.Parse("2018/12/31"), PlacesDisponibles = 10, PrixParPersonne = 2000.0m, AgenceVoyageID = 2, DestinationID = 1 }
 			);
+
+			context.Clients.AddOrUpdate(x => x.ID,
+				new Client() { ID = 1, Civilite = "Madame", Nom = "Chirac", Prenom = "Elisabeth", Adresse = "3 rue des casseroles", Telephone = "01.02.03.04.05", DateNaissance = DateTime.Parse("1955/02/24"), Email = "elisabeth.chirac@france.fr" },
+				new Client() { ID = 2, Civilite = "Monsieur", Nom = "Bush", Prenom = "Gerard", Adresse = "3 rue de Bagdad", Telephone = "06.66.66.66.66", DateNaissance = DateTime.Parse("1980/09/01"), Email = "gerad.bush@usa.us" }
+);
 		}
 	}
 }
