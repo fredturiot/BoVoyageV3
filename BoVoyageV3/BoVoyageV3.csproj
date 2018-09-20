@@ -84,7 +84,37 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Application\CSS\Style.css" />
+    <Content Include="Application\HTML\Admin.html" />
+    <Content Include="Application\HTML\AgenceEdit.html" />
+    <Content Include="Application\HTML\AgenceList.html" />
+    <Content Include="Application\HTML\AgenceNew.html" />
+    <Content Include="Application\HTML\AssuranceEdit.html" />
+    <Content Include="Application\HTML\AssuranceList.html" />
+    <Content Include="Application\HTML\AssuranceNew.html" />
+    <Content Include="Application\HTML\ClientEdit.html" />
+    <Content Include="Application\HTML\ClientList.html" />
+    <Content Include="Application\HTML\ClientNew.html" />
+    <Content Include="Application\HTML\Commercial.html" />
+    <Content Include="Application\HTML\DestinationEdit.html" />
+    <Content Include="Application\HTML\DestinationList.html" />
+    <Content Include="Application\HTML\DestinationNew.html" />
+    <Content Include="Application\HTML\DossierEdit.html" />
+    <Content Include="Application\HTML\DossierList.html" />
+    <Content Include="Application\HTML\DossierNew.html" />
+    <Content Include="Application\HTML\Login.html" />
+    <Content Include="Application\HTML\ParticipantEdit.html" />
+    <Content Include="Application\HTML\ParticipantList.html" />
+    <Content Include="Application\HTML\ParticipantNew.html" />
+    <Content Include="Application\HTML\VoyageEdit.html" />
+    <Content Include="Application\HTML\VoyageList.html" />
+    <Content Include="Application\HTML\VoyageNew.html" />
+    <Content Include="Application\IMG\1.jpg" />
+    <Content Include="Application\IMG\2.jpg" />
+    <Content Include="Application\JS\Script.js" />
+    <Content Include="Application\JS\ScriptClients.js" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
