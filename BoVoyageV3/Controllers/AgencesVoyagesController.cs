@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BoVoyageV3.Data;
 using BoVoyageV3.Models;
+using Newtonsoft.Json;
 
 namespace BoVoyageV3.Controllers
 {
@@ -40,14 +41,22 @@ namespace BoVoyageV3.Controllers
 		[ResponseType(typeof(AgenceVoyage))]
 		public IHttpActionResult GetAgenceVoyage(int id, bool details)
 		{
-			AgenceVoyage agenceVoyage = db.AgencesVoyages.Find(id);
-			if (agenceVoyage == null)
-			{
-				return NotFound();
-			}
+			IQueryable<AgenceVoyage> requete = db.AgencesVoyages.AsQueryable();
 
 			if (details)
-				db.Entry(agenceVoyage).Collection("Voyages").Load();
+			{
+				requete = requete
+					.Include(x => x.Voyages);
+
+				/*db.Entry(agenceVoyage).Collection(x => x.Voyages).Query()
+					.Include(y => y.Destination)
+					.Load();*/
+			}
+
+			AgenceVoyage agenceVoyage = requete.SingleOrDefault(x => x.ID == id);
+
+			if (agenceVoyage == null)
+				return NotFound();
 
 			return Ok(agenceVoyage);
 		}
@@ -85,7 +94,6 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				Console.WriteLine(ex);
 				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
 				return BadRequest(ModelState);
 			}
@@ -110,7 +118,6 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				Console.WriteLine(ex);
 				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
 				return BadRequest(ModelState);
 			}
@@ -136,7 +143,6 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				Console.WriteLine(ex);
 				ModelState.AddModelError("Foreign Key", "L'agence est la foreign key de un ou plusieurs voyage, veuillez les supprimer avant.");
 				return BadRequest(ModelState);
 			}

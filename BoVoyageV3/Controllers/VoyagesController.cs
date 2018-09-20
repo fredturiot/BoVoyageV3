@@ -67,8 +67,17 @@ namespace BoVoyageV3.Controllers
                     throw;
                 }
             }
+			catch (DbUpdateException ex)
+			{
+				bool testErreur = ex.InnerException.InnerException.Message.Contains("ERROR");
+				string[] errorArray = testErreur ? ex.InnerException.InnerException.Message.Split('"') : ex.InnerException.InnerException.Message.Split('.');
 
-            return StatusCode(HttpStatusCode.NoContent);
+				string error = testErreur ? errorArray[1] : errorArray[2].TrimStart();
+				ModelState.AddModelError("Constraint", error);
+				return BadRequest(ModelState);
+			}
+
+			return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Voyages
@@ -81,9 +90,22 @@ namespace BoVoyageV3.Controllers
             }
 
             db.Voyages.Add(voyage);
-            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = voyage.ID }, voyage);
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateException ex)
+			{
+				bool testErreur = ex.InnerException.InnerException.Message.Contains("ERROR");
+				string[] errorArray = testErreur ? ex.InnerException.InnerException.Message.Split('"') : ex.InnerException.InnerException.Message.Split('.');
+
+				string error = testErreur ? errorArray[1] : errorArray[2].TrimStart();
+				ModelState.AddModelError("Constraint", error);
+				return BadRequest(ModelState);
+			}
+
+			return CreatedAtRoute("DefaultApi", new { id = voyage.ID }, voyage);
         }
 
         // DELETE: api/Voyages/5
@@ -97,9 +119,17 @@ namespace BoVoyageV3.Controllers
             }
 
             db.Voyages.Remove(voyage);
-            db.SaveChanges();
 
-            return Ok(voyage);
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateException ex)
+			{
+				ModelState.AddModelError("Foreign Key", "Le voyage est la foreign key de un ou plusieurs dosier de reservation, veuillez les supprimer avant.");
+				return BadRequest(ModelState);
+			}
+			return Ok(voyage);
         }
 
         protected override void Dispose(bool disposing)

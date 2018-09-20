@@ -13,107 +13,146 @@ using BoVoyageV3.Models;
 
 namespace BoVoyageV3.Controllers
 {
-    public class DestinationsController : ApiController
-    {
-        private BoVoyageContext db = new BoVoyageContext();
+	public class DestinationsController : ApiController
+	{
+		private BoVoyageContext db = new BoVoyageContext();
 
-        // GET: api/Destinations
-        public IQueryable<Destination> GetDestinations()
-        {
-            return db.Destinations;
-        }
+		// GET: api/Destinations
+		public IQueryable<Destination> GetDestinations()
+		{
+			return db.Destinations;
+		}
 
-        // GET: api/Destinations/5
-        [ResponseType(typeof(Destination))]
-        public IHttpActionResult GetDestination(int id)
-        {
-            Destination destination = db.Destinations.Find(id);
-            if (destination == null)
-            {
-                return NotFound();
-            }
+		// GET: api/Destinations/5
+		[ResponseType(typeof(Destination))]
+		public IHttpActionResult GetDestination(int id)
+		{
+			Destination destination = db.Destinations.Find(id);
+			if (destination == null)
+			{
+				return NotFound();
+			}
 
-            return Ok(destination);
-        }
+			return Ok(destination);
+		}
 
-        // PUT: api/Destinations/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDestination(int id, Destination destination)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// GET: api/Destinations/5?details=[true or false]
+		[ResponseType(typeof(Destination))]
+		public IHttpActionResult GetDestination(int id, bool details)
+		{
+			Destination destination = db.Destinations.Find(id);
+			if (destination == null)
+			{
+				return NotFound();
+			}
 
-            if (id != destination.ID)
-            {
-                return BadRequest();
-            }
+			if (details)
+				db.Entry(destination).Collection("Voyages").Load();
 
-            db.Entry(destination).State = EntityState.Modified;
+			return Ok(destination);
+		}
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DestinationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+		// PUT: api/Destinations/5
+		[ResponseType(typeof(void))]
+		public IHttpActionResult PutDestination(int id, Destination destination)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+			if (id != destination.ID)
+			{
+				return BadRequest();
+			}
 
-        // POST: api/Destinations
-        [ResponseType(typeof(Destination))]
-        public IHttpActionResult PostDestination(Destination destination)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+			db.Entry(destination).State = EntityState.Modified;
 
-            db.Destinations.Add(destination);
-            db.SaveChanges();
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!DestinationExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
+			catch (DbUpdateException ex)
+			{
+				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				return BadRequest(ModelState);
+			}
 
-            return CreatedAtRoute("DefaultApi", new { id = destination.ID }, destination);
-        }
+			return StatusCode(HttpStatusCode.NoContent);
+		}
 
-        // DELETE: api/Destinations/5
-        [ResponseType(typeof(Destination))]
-        public IHttpActionResult DeleteDestination(int id)
-        {
-            Destination destination = db.Destinations.Find(id);
-            if (destination == null)
-            {
-                return NotFound();
-            }
+		// POST: api/Destinations
+		[ResponseType(typeof(Destination))]
+		public IHttpActionResult PostDestination(Destination destination)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            db.Destinations.Remove(destination);
-            db.SaveChanges();
+			db.Destinations.Add(destination);
 
-            return Ok(destination);
-        }
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateException ex)
+			{
+				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				return BadRequest(ModelState);
+			}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			return CreatedAtRoute("DefaultApi", new { id = destination.ID }, destination);
+		}
 
-        private bool DestinationExists(int id)
-        {
-            return db.Destinations.Count(e => e.ID == id) > 0;
-        }
-    }
+		// DELETE: api/Destinations/5
+		[ResponseType(typeof(Destination))]
+		public IHttpActionResult DeleteDestination(int id)
+		{
+			Destination destination = db.Destinations.Find(id);
+			if (destination == null)
+			{
+				return NotFound();
+			}
+
+			db.Destinations.Remove(destination);
+
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateException ex)
+			{
+				ModelState.AddModelError("Foreign Key", "La Destination est la foreign key de un ou plusieurs voyage, veuillez les supprimer avant.");
+				return BadRequest(ModelState);
+			}
+
+			return Ok(destination);
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				db.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		private bool DestinationExists(int id)
+		{
+			return db.Destinations.Count(e => e.ID == id) > 0;
+		}
+	}
 }
