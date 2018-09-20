@@ -93,7 +93,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809200819478_AgencesDestinationVoyage.cs" />
+    <Compile Include="Migrations\201809200819478_AgencesDestinationVoyage.Designer.cs">
+      <DependentUpon>201809200819478_AgencesDestinationVoyage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AgenceVoyage.cs" />
+    <Compile Include="Models\Destination.cs" />
+    <Compile Include="Models\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +115,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809200819478_AgencesDestinationVoyage.resx">
+      <DependentUpon>201809200819478_AgencesDestinationVoyage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
