@@ -15,11 +15,12 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #0B5563;
+    background-color: rgba(11, 84, 99, 0.603);
     overflow-x: hidden;
     padding: 20px;
     margin: 20px;
     border-radius: 25px;
+    
 }
 
 
@@ -53,7 +54,7 @@
     width: auto;
     /* min-width:300px; */
     border-radius: 25px;
-    background-color: #0B5563;
+    background-color: rgba(11, 84, 99, 0.603);
     color:white;
 }
 
