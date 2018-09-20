@@ -1,0 +1,123 @@
+﻿body {
+    background-image: url(../IMG/2.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.loginPage{
+    background-image: url(../IMG/1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.sidenav {
+   
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0B5563;
+    overflow-x: hidden;
+    padding: 20px;
+    margin: 50px;
+    border-radius: 25px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+    margin-left: 280px; /* Same as the width of the sidenav */
+    margin-right: 50px;
+    margin-top: 50px;
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 20px;
+    width: auto;
+    min-width:300px;
+    border-radius: 25px;
+    background-color: #0B5563;
+    color:white;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+    border:2px solid black;
+    border-radius: 10px;
+    margin: 3px;
+}
+
+
+.dropdown-container {
+    display: none;
+    border:2px solid white;
+    padding-left: 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.container-fluid {
+    margin-top: 25px;
+}
+
+ 
+ .modal {
+    display: none;
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; 
+    padding: 2%;
+    border: 1px solid #888;
+    width: 100%;
+    
+    
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} 
