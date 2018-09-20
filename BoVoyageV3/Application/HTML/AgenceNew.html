@@ -136,18 +136,18 @@
                 return false;
             }
 
-            let agenceVoyage = {
+            let agenceVoyage = { // change bloc
                 Nom: $('#Nom').val(),                
             };
 
             $.ajax({
                 type: 'POST',
-                url: '/api/agencesVoyages',
-                data: agenceVoyage,
+                url: '/api/agencesVoyages',// change bloc
+                data: agenceVoyage, 
                 success: function () {
                     $('form')[0].reset();
                     $('form').removeClass('was-validated');
-                    alert('Saisie Enregistrée');
+                    
                     
                 },
                 error: function () {
