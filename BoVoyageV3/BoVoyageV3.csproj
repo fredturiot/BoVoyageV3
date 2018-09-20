@@ -93,9 +93,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809200819478_AgencesDestinationVoyage.cs" />
-    <Compile Include="Migrations\201809200819478_AgencesDestinationVoyage.Designer.cs">
-      <DependentUpon>201809200819478_AgencesDestinationVoyage.cs</DependentUpon>
+    <Compile Include="Migrations\201809200829293_AgencesDestinationVoyage.cs" />
+    <Compile Include="Migrations\201809200829293_AgencesDestinationVoyage.Designer.cs">
+      <DependentUpon>201809200829293_AgencesDestinationVoyage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -117,8 +117,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809200819478_AgencesDestinationVoyage.resx">
-      <DependentUpon>201809200819478_AgencesDestinationVoyage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809200829293_AgencesDestinationVoyage.resx">
+      <DependentUpon>201809200829293_AgencesDestinationVoyage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
