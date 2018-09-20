@@ -12,14 +12,16 @@
           crossorigin="anonymous" />
 </head>
 <body>	
-        <div class="sidenav">
+    <div class="row">
+
+
+        <div class="sidenav col-lg-3 col-md-3 col-sm-8">
                 <button class="dropdown-btn">
                     Agences
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">           
                     <a href="AgenceNew.html">Créer Agences</a>
-                    <a href="AgenceEdit.html">Editer Agences</a>
                     <a href="AgenceList.html">Afficher Agences</a>
                 </div>
         
@@ -29,7 +31,6 @@
                 </button>
                 <div class="dropdown-container">          
                     <a href="AssuranceNew.html">Créer Assurances</a>
-                    <a href="AssuranceEdit.html">Editer Assurances</a>
                     <a href="AssuranceList.html">Afficher Assurances</a>
                 </div>
         
@@ -39,7 +40,6 @@
                 </button>
                 <div class="dropdown-container">
                     <a href="ClientNew.html">Créer Client</a>
-                    <a href="ClientEdit.html">Editer Client</a>
                     <a href="ClientList.html">Afficher Client</a>
                 </div>
         
@@ -49,7 +49,6 @@
                 </button>
                 <div class="dropdown-container">
                     <a href="DossierNew.html">Créer Dossier</a>
-                    <a href="DossierEdit.html">Editer Dossier</a>
                     <a href="DossierList.html">Afficher Dossier</a>
                 </div>
         
@@ -59,7 +58,6 @@
                 </button>
                 <div class="dropdown-container">
                     <a href="ParticipantNew.html">Créer Participant</a>
-                    <a href="ParticipantEdit.html">Editer Participant</a>
                     <a href="ParticipantList.html">Afficher Participant</a>
                 </div>
         
@@ -69,7 +67,6 @@
                 </button>
                 <div class="dropdown-container">
                     <a href="VoyageNew.html">Créer Voyages</a>
-                    <a href="VoyageEdit.html">Editer Voyages</a>
                     <a href="VoyageList.html">Afficher Voyages</a>
                 </div>
         
@@ -79,10 +76,18 @@
                     </button>
                     <div class="dropdown-container">
                         <a href="DestinationNew.html">Créer Destination</a>
-                        <a href="DestinationEdit.html">Editer Destination</a>
                         <a href="DestinationList.html">Afficher Destination</a>
                     </div>
             </div>
+
+            <div class="main  col-lg-8 col-md-7 col-sm-8">
+                    <div class="container-fluid">               
+                        <div id="liste">
+                        </div>
+                 </div>
+            </div>
+        </div>
+
         <script>
                 var dropdown = document.getElementsByClassName("dropdown-btn");
                 var i;
@@ -97,7 +102,81 @@
                             dropdownContent.style.display = "block";
                         }
                     });
-                }                      
-            </script>
+                } 
+                
+            
+                function getItems() {
+            $.ajax({
+                url: '/api/Destinations',//change  name here
+                success: function (items) {
+                    var divListeItems = $('#liste');
+                    divListeItems.empty();
+                    for (item of items) {
+                        var divItem = $('<div class="item"></div>');
+                        divItem.attr("data-id", item.ID);//change block                      
+                        //divItem.append($('<span></span>').text(item.Nom))
+
+                        divItem.append($('<label></label><br>').text(item.Continent));//change block  
+                        divItem.append($('<label></label><br>').text(item.Pays));
+                        divItem.append($('<label></label><br>').text(item.Region));
+                        divItem.append($('<label></label><br>').text(item.Description));
+
+                        var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
+                        buttonEdit.on('click', function () {
+                            var div = $(this).closest(".item");
+
+                            var idItem = div.attr("data-id");
+                            var allLabel = div.find('label');
+                            var continent = allLabel[0].textContent;//change block
+                            var pays = allLabel[1].textContent;
+                            var region = allLabel[2].textContent;
+
+                            
+                            
+                            
+                            window.location = "DestinationEdit.html?id=" + idItem +"&continent="+ continent+"&region="+region;//change link here
+                        });
+                        
+                        
+                        var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".item");
+                            var idItem = div.attr("data-id");
+                            SupprimerItem(idItem, div);
+                        });
+                        
+                        
+                        
+                        divItem.append(buttonDelete);
+                        divItem.append(buttonEdit);
+                        divListeItems.append(divItem);
+                    }
+                },
+                error: Erreur
+            });
+        }        
+        
+
+        function SupprimerItem(id, div) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/Destinations/' + id,//change name here
+                success: function () {
+                    $(div).remove();
+                },
+                error: Erreur
+            });
+        }
+
+        function Erreur() {
+            alert("Erreur !");
+        }
+
+        $(document).ready(getItems);
+
+        
+                
+                
+        </script>
 </body>
 </html>
