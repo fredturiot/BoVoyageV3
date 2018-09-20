@@ -33,11 +33,27 @@ namespace BoVoyageV3.Controllers
                 return NotFound();
             }
 
-            return Ok(agenceVoyage);
+			return Ok(agenceVoyage);
         }
 
-        // PUT: api/AgencesVoyages/5
-        [ResponseType(typeof(void))]
+		// GET: api/AgencesVoyages/5?details=[true or false]
+		[ResponseType(typeof(AgenceVoyage))]
+		public IHttpActionResult GetAgenceVoyage(int id, bool details)
+		{
+			AgenceVoyage agenceVoyage = db.AgencesVoyages.Find(id);
+			if (agenceVoyage == null)
+			{
+				return NotFound();
+			}
+
+			if (details)
+				db.Entry(agenceVoyage).Collection("Voyages").Load();
+
+			return Ok(agenceVoyage);
+		}
+
+		// PUT: api/AgencesVoyages/5
+		[ResponseType(typeof(void))]
         public IHttpActionResult PutAgenceVoyage(int id, AgenceVoyage agenceVoyage)
         {
             if (!ModelState.IsValid)
@@ -81,7 +97,17 @@ namespace BoVoyageV3.Controllers
             }
 
             db.AgencesVoyages.Add(agenceVoyage);
-            db.SaveChanges();
+
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateException ex)
+			{
+				Console.WriteLine(ex);
+				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				return BadRequest(ModelState);
+			}
 
             return CreatedAtRoute("DefaultApi", new { id = agenceVoyage.ID }, agenceVoyage);
         }
@@ -97,7 +123,18 @@ namespace BoVoyageV3.Controllers
             }
 
             db.AgencesVoyages.Remove(agenceVoyage);
-            db.SaveChanges();
+
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateException ex)
+			{
+				Console.WriteLine(ex);
+				ModelState.AddModelError("Foreign Key", "L'agence est la foreign key de un ou plusieurs voyage, veuillez les supprimer avant.");
+				return BadRequest(ModelState);
+			}
+            
 
             return Ok(agenceVoyage);
         }
