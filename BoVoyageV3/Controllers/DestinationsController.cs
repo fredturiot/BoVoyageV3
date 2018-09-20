@@ -132,7 +132,7 @@ namespace BoVoyageV3.Controllers
 			{
 				db.SaveChanges();
 			}
-			catch (DbUpdateException ex)
+			catch (DbUpdateException)
 			{
 				ModelState.AddModelError("Foreign Key", "La Destination est la foreign key de un ou plusieurs voyage, veuillez les supprimer avant.");
 				return BadRequest(ModelState);

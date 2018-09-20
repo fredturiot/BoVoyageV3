@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AgencesVoyagesController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DestinationsController.cs" />
     <Compile Include="Controllers\VoyagesController.cs" />
     <Compile Include="Data\BoVoyageContext.cs" />
@@ -130,9 +131,15 @@
     <Compile Include="Migrations\201809200829293_AgencesDestinationVoyage.Designer.cs">
       <DependentUpon>201809200829293_AgencesDestinationVoyage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809201432393_Clients.cs" />
+    <Compile Include="Migrations\201809201432393_Clients.Designer.cs">
+      <DependentUpon>201809201432393_Clients.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Destination.cs" />
+    <Compile Include="Models\Personne.cs" />
     <Compile Include="Models\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -151,6 +158,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809200829293_AgencesDestinationVoyage.resx">
       <DependentUpon>201809200829293_AgencesDestinationVoyage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809201432393_Clients.resx">
+      <DependentUpon>201809201432393_Clients.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
