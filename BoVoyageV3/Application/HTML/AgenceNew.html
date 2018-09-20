@@ -123,12 +123,12 @@
                 
                 //
 
-            function Valider() {
-            var form = $('form');
-            let estValide = form[0].checkValidity();
-            form.addClass("was-validated");
+        function Valider() {
+        var form = $('form');
+        let estValide = form[0].checkValidity();
+        form.addClass("was-validated");
 
-            return estValide;
+        return estValide;
         }
 
         function Enregistrer() {
@@ -136,21 +136,22 @@
                 return false;
             }
 
-            let AgenceVoyage = {
+            let agenceVoyage = {
                 Nom: $('#Nom').val(),                
             };
 
             $.ajax({
                 type: 'POST',
-                url: '/api/AgencesVoyages',
-                data: AgenceVoyage,
+                url: '/api/agencesVoyages',
+                data: agenceVoyage,
                 success: function () {
                     $('form')[0].reset();
                     $('form').removeClass('was-validated');
-                    //window.location.href = '/index.html';
+                    alert('Saisie Enregistrée');
+                    
                 },
                 error: function () {
-                    alert('erreur !!');
+                    alert('erreur !');
                 }
             });
 

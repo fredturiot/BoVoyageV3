@@ -143,7 +143,45 @@
                         dropdownContent.style.display = "block";
                     }
                 });
-            }                      
+            }   
+
+            //enregistrement
+            function Valider() {
+        var form = $('form');
+        let estValide = form[0].checkValidity();
+        form.addClass("was-validated");
+
+        return estValide;
+        }
+
+        function Enregistrer() {
+            if (!Valider()) {
+                return false;
+            }
+
+            let destination = {
+                Continent: $('#Continent').val(),
+                Pays: $('#Pays').val(), 
+                Region: $('#Region').val(), 
+                Description: $('#Description').val(),                 
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/destinations',
+                data: destination,
+                success: function () {
+                    $('form')[0].reset();
+                    $('form').removeClass('was-validated');
+                    
+                },
+                error: function () {
+                    alert('erreur !');
+                }
+            });
+
+            return false;
+        }                   
         </script>
 </body>
 </html>

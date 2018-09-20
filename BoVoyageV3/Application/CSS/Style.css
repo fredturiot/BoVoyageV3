@@ -121,3 +121,6 @@
     text-decoration: none;
     cursor: pointer;
 } 
+.custom{
+    float: right;
+}

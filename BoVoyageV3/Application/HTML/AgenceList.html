@@ -109,53 +109,42 @@
 
    
 
-            function getItems() {
-            var divListeItems = $('#listeItems');
-            setLoader(divListeItems);
-
+                    function getItems() {
             $.ajax({
                 url: '/api/AgencesVoyages',
                 success: function (items) {
+                    var divListeItems = $('#liste');
                     divListeItems.empty();
-                    if (items.length > 0) {
-                        for (item of items) {
-                            var divItem = $('<div class="Agence alert"></div>');
-                            divItem.attr("data-id", item.ID);
-
-                            if (item.Statut) {
-                                divItem.addClass('alert-success');
-                            }
-
-                            var inputEtat = $('<input type="checkbox">');
-                            inputEtat.attr('checked', item.Statut);
-                            inputEtat.on('click', function () {
-                                var div = $(this).closest(".Item");
-                                var idItem = div.attr("data-id");
-                                ModifierStatutItem(idItem, this);
-                            });
-
-                            var buttonDelete = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
-                            buttonDelete.on('click', function () {
-                                // Affichage d'une confirmation
-                                $.bsAlert.confirmTitle = 'Suppression';
-                                $.bsAlert.closeDisplay = 'Non';
-                                $.bsAlert.sureDisplay = 'Oui';
-                                $.bsAlert.confirm("Es-tu sûr?", () => {
-                                    var div = $(this).closest(".Tache");
-                                    var idItem = div.attr("data-id");
-                                    SupprimerItem(idItem, div);
-                                });
-                            });
-
-                            divItem.append(inputEtat);
-                            divItem.append($('<label></label>').text(item.Nom));
-                            divItem.append(buttonDelete);
-
-                            divListeItems.append(divItem);
+                    for (item of items) {
+                        var divItem = $('<div class="Item alert"></div>');
+                        divItem.attr("data-id", item.ID);
+                        if (item.Statut) {
+                            divItem.addClass('alert-success');
                         }
-                    } else {
-                        divListeItems.append($('<p class="lead">Aucune agence pour le moment...</p>'));
+                        
+                        var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".Item");
+                            var idItem = div.attr("data-id");
+                            SupprimerItem(idItem, div);
+                        });
+                        
+                        
+                        divItem.append($('<label></label>').text(item.Nom));
+                        divItem.append(buttonDelete);
+                        divListeItems.append(divItem);
                     }
+                },
+                error: Erreur
+            });
+        }
+
+        function SupprimerItem(id, div) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/AgencesVoyages/' + id,
+                success: function () {
+                    $(div).remove();
                 },
                 error: Erreur
             });
