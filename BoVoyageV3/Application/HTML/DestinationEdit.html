@@ -54,8 +54,8 @@
                     
     
                     <div class="actions">
-                            <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                            <a href="/" class="btn btn-light">Annuler</a>
+                            <button class="btn btn-primary" onclick="return Enregistrer(id);">Enregistrer</button>
+                            <a href="DestinationList.html" class="btn btn-light">Annuler</a>
                     </div>
 
                     
@@ -68,6 +68,42 @@
                     var region = GetURLParameter('region');
                    
                 })
+                function Valider() {
+                var form = $('form');
+                let estValide = form[0].checkValidity();
+                form.addClass("was-validated");
+
+                return estValide;
+                }
+                function Enregistrer(id) {
+                    if (!Valider()) {
+                        return false;
+                    }
+
+                    let destination = { // change bloc
+                        Continent: $('#Continent').val(),
+                        Pays: $('#Pays').val(), 
+                        Region: $('#Region').val(), 
+                        Description: $('#Description').val(),                 
+                    };
+
+                    $.ajax({
+                        type: 'PUT',
+                        url: '/api/Destinations/'+ id,// change bloc
+                        data: destination, 
+                        success: function () {
+                            $('form')[0].reset();
+                            $('form').removeClass('was-validated');
+                            
+                            
+                        },
+                        error: function () {
+                            alert('erreur !');
+                        }
+                    });
+
+                    return false;
+                }
                               
                 </script>
                 
