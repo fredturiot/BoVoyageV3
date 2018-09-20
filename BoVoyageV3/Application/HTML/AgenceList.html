@@ -12,7 +12,8 @@
           crossorigin="anonymous" />
 </head>
 <body>	
-        <div class="sidenav">
+    <div class="row">
+        <div class="sidenav col-lg-3 col-md-3 col-sm-8">
                 <button class="dropdown-btn">
                     Agences
                     <i class="fa fa-caret-down"></i>
@@ -84,12 +85,13 @@
                     </div>
             </div>
             
-            <div class="main">
+            <div class="main  col-lg-8 col-md-7 col-sm-8">
                 <div class="container-fluid">               
                     <div id="liste">
                     </div>
                 </div>
             </div>
+        </div>
         
         <script>
                 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -109,53 +111,118 @@
 
    
 
-            function getItems() {
-            var divListeItems = $('#listeItems');
-            setLoader(divListeItems);
-
+        function getItems() {
             $.ajax({
-                url: '/api/AgencesVoyages',
+                url: '/api/AgencesVoyages',//change  name here
                 success: function (items) {
+                    var divListeItems = $('#liste');
                     divListeItems.empty();
-                    if (items.length > 0) {
-                        for (item of items) {
-                            var divItem = $('<div class="Agence alert"></div>');
-                            divItem.attr("data-id", item.ID);
+                    for (item of items) {
+                        var divItem = $('<div class="item"></div>');
+                        divItem.attr("data-id", item.ID);
+                        //divItem.append($('<span></span>').text(item.Nom))
 
-                            if (item.Statut) {
-                                divItem.addClass('alert-success');
-                            }
-
-                            var inputEtat = $('<input type="checkbox">');
-                            inputEtat.attr('checked', item.Statut);
-                            inputEtat.on('click', function () {
-                                var div = $(this).closest(".Item");
-                                var idItem = div.attr("data-id");
-                                ModifierStatutItem(idItem, this);
-                            });
-
-                            var buttonDelete = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
-                            buttonDelete.on('click', function () {
-                                // Affichage d'une confirmation
-                                $.bsAlert.confirmTitle = 'Suppression';
-                                $.bsAlert.closeDisplay = 'Non';
-                                $.bsAlert.sureDisplay = 'Oui';
-                                $.bsAlert.confirm("Es-tu sûr?", () => {
-                                    var div = $(this).closest(".Tache");
-                                    var idItem = div.attr("data-id");
-                                    SupprimerItem(idItem, div);
-                                });
-                            });
-
-                            divItem.append(inputEtat);
-                            divItem.append($('<label></label>').text(item.Nom));
-                            divItem.append(buttonDelete);
-
-                            divListeItems.append(divItem);
-                        }
-                    } else {
-                        divListeItems.append($('<p class="lead">Aucune agence pour le moment...</p>'));
+                        var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
+                        buttonEdit.on('click', function () {
+                            var div = $(this).closest(".item");
+                            var idItem = div.attr("data-id");
+                            Modifier($(this));
+                        });
+                        
+                        
+                        var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".item");
+                            var idItem = div.attr("data-id");
+                            SupprimerItem(idItem, div);
+                        });
+                        
+                        
+                        divItem.append($('<label></label>').text(item.Nom));
+                        divItem.append(buttonDelete);
+                        divItem.append(buttonEdit);
+                        divListeItems.append(divItem);
                     }
+                },
+                error: Erreur
+            });
+        }
+        function Modifier(bouton) {
+            var div = bouton.closest('.item');
+            var label = div.find('label');
+            var nom = label.text();
+            div.data('nom', nom);//save change  this block
+            div.empty();       
+            var input = $('<input type="text"/>').val(label.text());//change  this block           
+            div.append(input);
+            input.focus();
+            input.select();
+            input.on('keyup', function (event) {
+                var divItem = $(this).closest('.item');
+                switch (event.which) {
+                    case 13:
+                        EnregistrerModification(divItem);
+                        break;
+                    case 27:
+                        AnnulerModification(divItem);
+                        break;
+                }
+            });
+        }
+        function AnnulerModification(divItem) {//change  this block
+            let idItem = divItem.data('id');
+            let nomItem = divItem.data('nom'); 
+            RemplirDivItem(divItem, { ID: idItem, Nom: nomItem });
+        }
+
+        function EnregistrerModification(divItem) {
+            let idItem = divItem.data('id');
+            alert(idItem);
+            let nomItem = divItem.find('input').val();
+            $.ajax({
+                type: 'PUT',
+                url: '/api/AgencesVoyages/' + idItem,//change  name here
+                data: {
+                    ID: idItem,
+                    Nom: nomItem//change  this block
+                },
+                success: function () {
+                    
+                    RemplirDivItem(divItem, { ID: idItem, Nom: nomItem });//change  this block
+                },
+                error: function (erreur) {
+                    alert(erreur);
+                }
+            });
+        }
+
+                function RemplirDivItem(divItem, item) {
+                    divItem.empty();
+                    divItem.data('id', item.ID);
+                    divItem.append($('<span></span>').text(item.Nom));//change  this block
+
+                    var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
+                        buttonEdit.on('click', function () {
+                            var div = $(this).closest(".item");
+                            var idItem = div.attr("data-id");
+                            Modifier($(this));
+                    });                     
+                        
+                    var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".item");
+                            var idItem = div.attr("data-id");
+                            SupprimerItem(idItem, div);
+                    });
+            
+        }
+
+        function SupprimerItem(id, div) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/AgencesVoyages/' + id,//change name here
+                success: function () {
+                    $(div).remove();
                 },
                 error: Erreur
             });
