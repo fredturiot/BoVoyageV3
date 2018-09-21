@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,8 +24,14 @@ namespace BoVoyageV3.Controllers
             return db.Voyages;
         }
 
-        // GET: api/Voyages/5
-        [ResponseType(typeof(Voyage))]
+		// GET: api/Voyages?details=[true or false]
+		public IQueryable<Voyage> GetVoyages(bool details)
+		{
+			return db.Voyages.Include("Destination").Include("AgenceVoyage");
+		}
+
+		// GET: api/Voyages/5
+		[ResponseType(typeof(Voyage))]
         public IHttpActionResult GetVoyage(int id)
         {
             Voyage voyage = db.Voyages.Find(id);
@@ -69,11 +76,12 @@ namespace BoVoyageV3.Controllers
             }
 			catch (DbUpdateException ex)
 			{
-				bool testErreur = ex.InnerException.InnerException.Message.Contains("ERROR");
-				string[] errorArray = testErreur ? ex.InnerException.InnerException.Message.Split('"') : ex.InnerException.InnerException.Message.Split('.');
-
-				string error = testErreur ? errorArray[1] : errorArray[2].TrimStart();
-				ModelState.AddModelError("Constraint", error);
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message);
+				return BadRequest(ModelState);
+			}
+			catch (DbEntityValidationException dbEx)
+			{
+				ModelState.AddModelError("Erreur", dbEx.EntityValidationErrors.ToString());
 				return BadRequest(ModelState);
 			}
 
@@ -97,11 +105,12 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				bool testErreur = ex.InnerException.InnerException.Message.Contains("ERROR");
-				string[] errorArray = testErreur ? ex.InnerException.InnerException.Message.Split('"') : ex.InnerException.InnerException.Message.Split('.');
-
-				string error = testErreur ? errorArray[1] : errorArray[2].TrimStart();
-				ModelState.AddModelError("Constraint", error);
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message);
+				return BadRequest(ModelState);
+			}
+			catch (DbEntityValidationException dbEx)
+			{
+				ModelState.AddModelError("Erreur", dbEx.EntityValidationErrors.ToString());
 				return BadRequest(ModelState);
 			}
 
@@ -126,7 +135,7 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException)
 			{
-				ModelState.AddModelError("Foreign Key", "Le voyage est la foreign key de un ou plusieurs dosier de reservation, veuillez les supprimer avant.");
+				ModelState.AddModelError("Erreur", "Le voyage est la foreign key de un ou plusieurs dosier de reservation, veuillez les supprimer avant.");
 				return BadRequest(ModelState);
 			}
 			return Ok(voyage);
