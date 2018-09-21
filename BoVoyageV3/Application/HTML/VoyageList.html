@@ -110,8 +110,8 @@
 
                         divItem.append($('<label></label><br>').text("Destination: " + item.Destination.Pays + " / " + item.Destination.Region)); //change block  
                         divItem.append($('<label></label><br>').text("Agence :" + item.AgenceVoyage.Nom));
-                        divItem.append($('<label></label><br>').text("Aller :" + item.DateAller));
-                        divItem.append($('<label></label><br>').text("Retour :" + item.DateRetour));
+                        divItem.append($('<label></label><br>').text("Aller :" + item.DateAller.substring(0, 10)));
+                        divItem.append($('<label></label><br>').text("Retour :" + item.DateRetour.substring(0, 10)));
                         divItem.append($('<label></label><br>').text("Prix :" + item.PrixParPersonne));
                         divItem.append($('<label></label>').text("Places :" + item.PlacesDisponibles));
 
