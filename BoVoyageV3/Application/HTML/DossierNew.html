@@ -13,7 +13,7 @@
 </head>
 <body>	
         <div class="row">
-        <div class="sidenav col-lg-3 col-md-3 col-sm-8">
+        <div class="sidenav col-lg-2 col-md-3 col-sm-8">
                 <button class="dropdown-btn">
                     Agences
                     <i class="fa fa-caret-down"></i>
@@ -84,10 +84,11 @@
                                     Champ requis
                                 </div>
                         </div>
+           
 
                         <div class="form-group">
                                 <label for="PrixPersonne">Prix par personnes</label>
-                                <input type="text" placeholder="PrixPersonne" class="form-control" id="PrixPersonne" required />
+                                <input type="number" placeholder="Prix par Personne" class="form-control" id="PrixPersonne" required />
                                 <div class="invalid-feedback">
                                     Champ requis
                                 </div>   
@@ -107,10 +108,19 @@
                                     Champ requis
                                 </div>
                         </div>
+
+                        <div class="form-group">
+                                <label for="NbParticipant">Nombre de Participants</label>
+                                <input type="number" min="1" max="9" value="1" class="form-control" id="NbParticipant" required/>
+                                <div class="invalid-feedback">
+                                    Champ requis
+                                </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="return ValiderNbParticipant();">valider</button>
                                               
                 </form>
                             
-                <button id="myBtn" class="btn btn-primary" onclick="return AjouterParticipant();">Ajouter un participant</button>
+                
                
                 <div class="actions">
                     <br>
@@ -171,6 +181,8 @@
                                     Champ requis
                                 </div>
                         </div>  
+
+                        <button class="btn btn-primary" onclick="return AjouterParticipant();">Ajouter ce participant</button>
                 </form>
                
             </div>
@@ -211,6 +223,9 @@
         }
 
         function AjouterParticipant(){
+            //ToDo
+        }
+        function VerifierSolvabilite(){
             //ToDo
         }
 
