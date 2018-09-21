@@ -81,18 +81,6 @@
                     var agenceVoyageID;
                     promise = Load('voyages', id); //edit controller name
                     promise.then(function (item) {
-                        /* var selectDest = $('#Destination');
-                        var optionDestSelected = $('<option></option>');
-                        optionDestSelected.val(item.DestinationID);
-                        optionDestSelected.attr('selected', 'selected');
-                        selectDest.append(optionDestSelected);
-                        //option.text(item.Pays + ' - ' + item.Region);
-                        var selectAgence = $('#AgenceVoyage');
-                        var optionAgenceSelected = $('<option></option>');
-                        optionAgenceSelected.val(item.AgenceVoyageID);
-                        optionAgenceSelected.attr('selected', 'selected');
-                        selectAgence.append(optionAgenceSelected); */
-                        //option.text(item.Pays + ' - ' + item.Region);
                         destinationID = item.DestinationID;
                         agenceVoyageID = item.AgenceVoyageID;
                         $('#DateAller').val(item.DateAller.substring(0, 10));
