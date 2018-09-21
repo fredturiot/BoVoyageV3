@@ -1,127 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Nouvelle Assurance</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
     <script src="../JS/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" />
+        crossorigin="anonymous" />
 </head>
-<body>	
-        <div class="row">
+
+<body>
+    <div class="row">
         <div class="sidenav col-lg-3 col-md-3 col-sm-8">
-                <button class="dropdown-btn">
-                    Agences
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">           
-                    <a href="AgenceNew.html">Créer Agences</a>
-                    <a href="AgenceList.html">Afficher Agences</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Assurances
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">          
-                    <a href="AssuranceNew.html">Créer Assurances</a>
-                    <a href="AssuranceList.html">Afficher Assurances</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Clients
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ClientNew.html">Créer Client</a>
-                    <a href="ClientList.html">Afficher Client</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Dossiers
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="DossierNew.html">Créer Dossier</a>
-                    <a href="DossierList.html">Afficher Dossier</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Participants
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ParticipantNew.html">Créer Participant</a>
-                    <a href="ParticipantList.html">Afficher Participant</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Voyages
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="VoyageNew.html">Créer Voyages</a>
-                    <a href="VoyageList.html">Afficher Voyages</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                        Destination
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-container">
-                        <a href="DestinationNew.html">Créer Destination</a>
-                        <a href="DestinationList.html">Afficher Destination</a>
-                    </div>
+            <button class="dropdown-btn">
+                Agences
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AgenceNew.html">Créer Agences</a>
+                <a href="AgenceList.html">Afficher Agences</a>
             </div>
-            
+
+            <button class="dropdown-btn">
+                Assurances
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AssuranceNew.html">Créer Assurances</a>
+                <a href="AssuranceList.html">Afficher Assurances</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Clients
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ClientNew.html">Créer Client</a>
+                <a href="ClientList.html">Afficher Client</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Dossiers
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DossierNew.html">Créer Dossier</a>
+                <a href="DossierList.html">Afficher Dossier</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Participants
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ParticipantNew.html">Créer Participant</a>
+                <a href="ParticipantList.html">Afficher Participant</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Voyages
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="VoyageNew.html">Créer Voyages</a>
+                <a href="VoyageList.html">Afficher Voyages</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Destination
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DestinationNew.html">Créer Destination</a>
+                <a href="DestinationList.html">Afficher Destination</a>
+            </div>
+        </div>
+
         <div class="main">
 
             <div class="container-fluid">
-                <h3>Nouvelle Assurance</h3>
+                <h3>Nouvelle Assurance Annulation</h3>
 
                 <form novalidate>
+
                         <div class="form-group">
-                            <label for="Nom">Nom</label>
-                            <input type="text" placeholder="Nom" class="form-control" id="Nom" required />
-                            <div class="invalid-feedback">
-                                Champ requis
-                            </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="Montant">Montant</label>
-                                <input type="text" placeholder="Montant" class="form-control" id="Montant" required />
+                                <label for="Type">Type (doit être 1)</label>
+                                <input type="text" value="1" class="form-control" id="type" required />
                                 <div class="invalid-feedback">
                                     Champ requis
                                 </div>
-                            </div>
+                        </div>
+
+                    <div class="form-group">
+                        <label for="Montant">Montant</label>
+                        <input type="text" placeholder="Montant" class="form-control" id="Montant" required />
+                        <div class="invalid-feedback">
+                            Champ requis
+                        </div>
+                    </div>
                 </form>
 
                 <div class="actions">
-                        <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                        <a href="/" class="btn btn-light">Annuler</a>
+                    <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
+                    <a href="/" class="btn btn-light">Annuler</a>
                 </div>
             </div>
         </div>
-        </div>
-        <script>
-                var dropdown = document.getElementsByClassName("dropdown-btn");
-                var i;
-    
-                for (i = 0; i < dropdown.length; i++) {
-                    dropdown[i].addEventListener("click", function () {
-                        this.classList.toggle("active");
-                        var dropdownContent = this.nextElementSibling;
-                        if (dropdownContent.style.display === "block") {
-                            dropdownContent.style.display = "none";
-                        } else {
-                            dropdownContent.style.display = "block";
-                        }
-                    });
-                }                      
-            </script>
+    </div>
+    <script>
+        //sidebar
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+        //enregistrement
+
+        function Valider() {
+            var form = $('form');
+            let estValide = form[0].checkValidity();
+            form.addClass("was-validated");
+
+            return estValide;
+        }
+
+        function Enregistrer() {
+            if (!Valider()) {
+                return false;
+            }
+
+            let assurance = {
+               Montant: $('#Montant').val(),
+               Type:$('#type').val(),
+            }; 
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Assurances',
+                data: assurance,
+                success: function () {
+                    $('form')[0].reset();
+                    $('form').removeClass('was-validated');
+
+                },
+                error: function () {
+                    alert('erreur !');
+                }
+            });
+            return false;
+        }                  
+    </script>
 </body>
+
 </html>
