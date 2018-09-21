@@ -78,7 +78,7 @@
                         <a href="DestinationNew.html">Créer Destination</a>
                         <a href="DestinationList.html">Afficher Destination</a>
                     </div>
-            </div>
+        </div>
         
             <div class="main  col-lg-8 col-md-7 col-sm-8">
                     <div class="container-fluid"> 
@@ -133,11 +133,12 @@
                             var continent = allLabel[0].textContent;//change block
                             var pays = allLabel[1].textContent;
                             var region = allLabel[2].textContent;
+                            var description = allLabel[3].textContent;
 
                             
                             
                             
-                            window.location = "DestinationEdit.html?id=" + idItem +"&continent="+ continent+"&region="+region;//change link here
+                            window.location = "DestinationEdit.html?id=" + idItem +"&continent="+ continent+"&region="+region+"&description="+description;//change link here
                         });
                         
                         
