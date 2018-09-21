@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Edition d'agence</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
-    <script src="../JS/script.js"></script>
+    <title>Edition d'Agence</title>
+    <link rel="stylesheet" type="text/css" href="/Application/CSS/style.css" />
+    <script src="/Application/JS/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -84,23 +84,43 @@
 
         <div class="main  col-lg-8 col-md-7 col-sm-8">
             <div class="container-fluid">
+                <h4>Agences de voyage</h4>
                 <div id="liste">
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
     <script>
+        $(document).ready(() => {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+
+            for (var i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+            getItems();
+        });
+
         function getItems() {
             $.ajax({
                 url: '/api/AgencesVoyages', //change  name here
                 success: function (items) {
                     var divListeItems = $('#liste');
                     divListeItems.empty();
+
                     for (item of items) {
                         var divItem = $('<div class="item"></div>');
                         divItem.attr("data-id", item.ID);
+
+                        divItem.append($('<label></label>').text(item.Nom));
 
                         var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
                         buttonEdit.on('click', function () {
@@ -116,13 +136,14 @@
                             SupprimerItem(idItem, div);
                         });
 
-                        divItem.append($('<label></label>').text(item.Nom));
                         divItem.append(buttonDelete);
                         divItem.append(buttonEdit);
                         divListeItems.append(divItem);
                     }
                 },
-                error: Erreur
+                error: function() {
+                    alert('Erreur');
+                }
             });
         }
 
@@ -175,8 +196,8 @@
                         Nom: nomItem
                     }); //change  this block
                 },
-                error: function (erreur) {
-                    Erreur(erreur);
+                error: function (data) {
+                    Erreur(data);
                     AnnulerModification(divItem);
                 }
             });
@@ -211,33 +232,11 @@
                 success: function () {
                     $(div).remove();
                 },
-                error: Erreur
+                error: function (data) {
+                    Erreur(data);
+                }
             });
         }
-
-        function Erreur(data) {
-            var modelState = data.responseJSON.ModelState;
-            var message = modelState[Object.keys(modelState)[0]][0];
-            alert(message);
-        }
-
-        $(document).ready(() => {
-            var dropdown = document.getElementsByClassName("dropdown-btn");
-            var i;
-
-            for (i = 0; i < dropdown.length; i++) {
-                dropdown[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var dropdownContent = this.nextElementSibling;
-                    if (dropdownContent.style.display === "block") {
-                        dropdownContent.style.display = "none";
-                    } else {
-                        dropdownContent.style.display = "block";
-                    }
-                });
-            }
-            getItems();
-        });
     </script>
 </body>
 

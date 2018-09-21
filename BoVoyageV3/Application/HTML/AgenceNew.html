@@ -106,6 +106,7 @@
     <script>
         $(document).ready(() => {
             var dropdown = document.getElementsByClassName("dropdown-btn");
+
             for (var i = 0; i < dropdown.length; i++) {
                 dropdown[i].addEventListener("click", function () {
                     this.classList.toggle("active");
@@ -144,11 +145,7 @@
                     window.location.href = '/Application/HTML/AgenceList.html';
                 },
                 error: function (data) {
-                    var form = $('form');
-                    form.removeClass("was-validated");
-                    var modelState = data.responseJSON.ModelState;
-                    var message = modelState[Object.keys(modelState)[0]][0];
-                    alert(message);
+                    Erreur(data);
                 }
             });
 
