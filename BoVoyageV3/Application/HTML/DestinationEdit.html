@@ -60,62 +60,59 @@
                 <a href="/Application/HTML/DestinationList.html" class="btn btn-light">Annuler</a>
             </div>
 
-
-
-            <script>
-                $(document).ready(function () { //change block
-                    var id = GetURLParameter('id');
-
-                    promise = Load('destinations', id); //edit controller name
-                    promise.then(function (item) {
-                        $('#Continent').val(item.Continent);
-                        $('#Pays').val(item.Pays);
-                        $('#Region').val(item.Region);
-                        $('#Description').val(item.Description);
-                    });
-                })
-
-                function Valider() {
-                    var form = $('form');
-                    let estValide = form[0].checkValidity();
-                    form.addClass("was-validated");
-
-                    return estValide;
-                }
-
-                function Enregistrer(id) {
-                    if (!Valider()) {
-                        return false;
-                    }
-                    var id = GetURLParameter('id');
-
-                    let destination = { // change bloc
-                        Continent: $('#Continent').val(),
-                        Pays: $('#Pays').val(),
-                        Region: $('#Region').val(),
-                        Description: $('#Description').val(),
-                        ID: id
-                    };
-
-                    $.ajax({
-                        type: 'PUT',
-                        url: '/api/Destinations/' + id, // change bloc
-                        data: destination,
-                        success: function () {
-                            window.location.href = '/Application/HTML/DestinationList.html';
-                        },
-                        error: function (response) {
-                            Erreur(response);
-                        }
-                    });
-
-                    return false;
-                }
-            </script>
-
         </div>
+    </div>
 
+    <script>
+        $(document).ready(function () { //change block
+            var id = GetURLParameter('id');
 
+            promise = Load('destinations', id); //edit controller name
+            promise.then(function (item) {
+                $('#Continent').val(item.Continent);
+                $('#Pays').val(item.Pays);
+                $('#Region').val(item.Region);
+                $('#Description').val(item.Description);
+            });
+        })
+
+        function Valider() {
+            var form = $('form');
+            let estValide = form[0].checkValidity();
+            form.addClass("was-validated");
+
+            return estValide;
+        }
+
+        function Enregistrer() {
+            if (!Valider()) {
+                return false;
+            }
+            var id = GetURLParameter('id');
+
+            let destination = { // change bloc
+                Continent: $('#Continent').val(),
+                Pays: $('#Pays').val(),
+                Region: $('#Region').val(),
+                Description: $('#Description').val(),
+                ID: id
+            };
+
+            $.ajax({
+                type: 'PUT',
+                url: '/api/Destinations/' + id, // change bloc
+                data: destination,
+                success: function () {
+                    window.location.href = '/Application/HTML/DestinationList.html';
+                },
+                error: function (response) {
+                    Erreur(response);
+                }
+            });
+
+            return false;
+        }
+    </script>
 </body>
 
 </html>
