@@ -1,82 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Nouveau Voyage</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
     <script src="../JS/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" />
+        crossorigin="anonymous" />
 </head>
-<body>	
-        <div class="row">
+
+<body>
+    <div class="row">
         <div class="sidenav col-lg-3 col-md-3 col-sm-8">
-                <button class="dropdown-btn">
-                    Agences
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">           
-                    <a href="AgenceNew.html">Créer Agences</a>
-                    <a href="AgenceList.html">Afficher Agences</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Assurances
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">          
-                    <a href="AssuranceNew.html">Créer Assurances</a>
-                    <a href="AssuranceList.html">Afficher Assurances</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Clients
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ClientNew.html">Créer Client</a>
-                    <a href="ClientList.html">Afficher Client</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Dossiers
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="DossierNew.html">Créer Dossier</a>
-                    <a href="DossierList.html">Afficher Dossier</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Participants
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ParticipantNew.html">Créer Participant</a>
-                    <a href="ParticipantList.html">Afficher Participant</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Voyages
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="VoyageNew.html">Créer Voyages</a>
-                    <a href="VoyageList.html">Afficher Voyages</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                        Destination
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-container">
-                        <a href="DestinationNew.html">Créer Destination</a>
-                        <a href="DestinationList.html">Afficher Destination</a>
-                    </div>
+            <button class="dropdown-btn">
+                Agences
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AgenceNew.html">Créer Agences</a>
+                <a href="AgenceList.html">Afficher Agences</a>
             </div>
+
+            <button class="dropdown-btn">
+                Assurances
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AssuranceNew.html">Créer Assurances</a>
+                <a href="AssuranceList.html">Afficher Assurances</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Clients
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ClientNew.html">Créer Client</a>
+                <a href="ClientList.html">Afficher Client</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Dossiers
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DossierNew.html">Créer Dossier</a>
+                <a href="DossierList.html">Afficher Dossier</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Participants
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ParticipantNew.html">Créer Participant</a>
+                <a href="ParticipantList.html">Afficher Participant</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Voyages
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="VoyageNew.html">Créer Voyages</a>
+                <a href="VoyageList.html">Afficher Voyages</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Destination
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DestinationNew.html">Créer Destination</a>
+                <a href="DestinationList.html">Afficher Destination</a>
+            </div>
+        </div>
         <div class="main">
 
             <div class="container-fluid">
@@ -84,81 +86,83 @@
 
                 <form novalidate>
 
-                        <div class="form-group">
-                                <label for="Destination">Destination</label>
-                                <select class="form-control" id="Destination" required></select>
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
+                    <div class="form-group">
+                        <label for="Destination">Destination</label>
+                        <select class="form-control" id="Destination" required></select>
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        
-                        <div class="form-group">
-                                    <label for="AgenceVoyage">Agence de Voyage</label>
-                                    <select class="form-control" id="AgenceVoyage" required></select>
-                                    <div class="invalid-feedback">
-                                        Champ requis
-                                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="AgenceVoyage">Agence de Voyage</label>
+                        <select class="form-control" id="AgenceVoyage" required></select>
+                        <div class="invalid-feedback">
+                            Champ requis
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DateAller">Date Aller</label>
+                        <input type="date" class="form-control" id="DateAller" />
+                    </div>
+                    <div class="form-group">
+                        <label for="DateRetour">Date de retour</label>
+                        <input type="date" class="form-control" id="DateRetour" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="PlacesDisponibles">Places Disponibles</label>
+                        <input type="text" placeholder="Places Disponibles" class="form-control" id="PlacesDisponibles"
+                            required />
+                        <div class="invalid-feedback">
+                            Champ requis
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="PrixPersonne">Prix par personnes</label>
+                        <input type="text" placeholder="PrixPersonne" class="form-control" id="PrixPersonne" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
 
-                        <div class="form-group">
-                                <label for="DateAller">Date Aller</label>
-                                <input type="date" class="form-control" id="DateAller" />
-                        </div>
-                        <div class="form-group">
-                                <label for="DateRetour">Date de retour</label>
-                                <input type="date" class="form-control" id="DateRetour" />
-                        </div>
-                    
+                    </div>
 
-                        <div class="form-group">
-                                <label for="PlacesDisponibles">Places Disponibles</label>
-                                <input type="text" placeholder="Places Disponibles" class="form-control" id="PlacesDisponibles" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                        </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="PrixPersonne">Prix par personnes</label>
-                            <input type="text" placeholder="PrixPersonne" class="form-control" id="PrixPersonne" required />
-                            <div class="invalid-feedback">
-                                Champ requis
-                        </div>
-                        
-                        </div>  
-                        
-                        
+
                 </form>
 
                 <div class="actions">
-                        <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                        <a href="/" class="btn btn-light">Annuler</a>
+                    <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
+                    <a href="/" class="btn btn-light">Annuler</a>
                 </div>
             </div>
         </div>
-        </div>
-        <script>
-                var dropdown = document.getElementsByClassName("dropdown-btn");
-                var i;
-    
-                for (i = 0; i < dropdown.length; i++) {
-                    dropdown[i].addEventListener("click", function () {
-                        this.classList.toggle("active");
-                        var dropdownContent = this.nextElementSibling;
-                        if (dropdownContent.style.display === "block") {
-                            dropdownContent.style.display = "none";
-                        } else {
-                            dropdownContent.style.display = "block";
-                        }
-                    });
-                }     
-                
-                //enregistrement
-            function Valider() {
-        var form = $('form');
-        let estValide = form[0].checkValidity();
-        form.addClass("was-validated");
+    </div>
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
 
-        return estValide;
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+        //enregistrement
+
+        function Valider() {
+            var form = $('form');
+            let estValide = form[0].checkValidity();
+            form.addClass("was-validated");
+
+            return estValide;
         }
 
         function Enregistrer() {
@@ -168,11 +172,11 @@
 
             let destination = {
                 Destination: $('#Destination').val(),
-                AgenceVoyage: $('#AgenceVoyage').val(), 
-                DateAller: $('#DateAller').val(), 
+                AgenceVoyage: $('#AgenceVoyage').val(),
+                DateAller: $('#DateAller').val(),
                 DateRetour: $('#DateRetour').val(),
-                PlacesDisponibles:$('#PlacesDisponibles').val(),
-                PrixPersonne:$('#PrixPersonne').val(),                 
+                PlacesDisponibles: $('#PlacesDisponibles').val(),
+                PrixPersonne: $('#PrixPersonne').val(),
             };
 
             $.ajax({
@@ -182,15 +186,58 @@
                 success: function () {
                     $('form')[0].reset();
                     $('form').removeClass('was-validated');
-                    
+
                 },
                 error: function () {
                     alert('erreur !');
                 }
             });
-
             return false;
-        }                   
-            </script>
+        }
+
+        //load
+
+
+        function AppendLoadToSelect(selectIdDest,selectIdAgence) {
+            var select = $("#" + selectIdDest);
+            select.empty();
+            select.append($('<option></option>'));
+            let pro = Load('destinations');//edit controller name
+            pro.then(function (values) {
+                for (item of values) {
+                    var option = $('<option></option>');
+                    option.val(item.ID);
+                    option.text(item.Pays + ' - ' + item.Region);//edit here          
+                    select.append(option);
+                }
+            });
+            var select2 = $("#" + selectIdAgence);
+            select2.empty();
+            select2.append($('<option></option>'));
+            pro = Load('agencesvoyages');//edit controller name
+            pro.then(function (values) {
+                for (item of values) {
+                    var option = $('<option></option>');
+                    option.val(item.ID);
+                    option.text(item.Nom);//edit here          
+                    select2.append(option);
+                }
+            });
+        }
+
+
+
+        $(document).ready(function () {
+            AppendLoadToSelect('Destination','AgenceVoyage');
+           
+        });
+
+        
+
+        
+
+
+    </script>
 </body>
+
 </html>

@@ -14,8 +14,16 @@ function GetURLParameter(sParam)
 	        return sParameterName[1];
 	    }
 	 }
-    }
+}
 
+function Load(controller) {
+        return Promise.resolve($.ajax({
+            url: '/api/'+ controller,           
+            /* success: function (items) {
+                return items.SignedIn;              
+            } */
+        }));
+}
 /* function LoadAjaxData() {
     var searchString = $('#searchString').val();
     $.ajax(
