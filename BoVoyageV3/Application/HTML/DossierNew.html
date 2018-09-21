@@ -49,15 +49,7 @@
                     <a href="DossierNew.html">Créer Dossier</a>
                     <a href="DossierList.html">Afficher Dossier</a>
                 </div>
-        
-                <button class="dropdown-btn">
-                    Participants
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ParticipantNew.html">Créer Participant</a>
-                    <a href="ParticipantList.html">Afficher Participant</a>
-                </div>
+
         
                 <button class="dropdown-btn">
                     Voyages
@@ -118,71 +110,8 @@
                                               
                 </form>
                             
-                <button id="myBtn" class="btn btn-primary">Ajouter un participant</button>
-
-                <div id="myModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <div class="container-fluid">                              
-                                <h3 style="color: black">Nouveau Participant</h3>
-                
-                                <form novalidate>
-                                        <div class="form-group">
-                                                <label for="Civilite">Civilité</label>
-                                                <input type="text" placeholder="Civilité" class="form-control" id="Civilite" required />
-                                                <div class="invalid-feedback">
-                                                    Champ requis
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Nom">Nom</label>
-                                            <input type="text" placeholder="Nom" class="form-control" id="Nom" required />
-                                            <div class="invalid-feedback">
-                                                Champ requis
-                                        </div>
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="Prenom">Prenom</label>
-                                                <input type="text" placeholder="Prenom" class="form-control" id="Prenom" required />
-                                                <div class="invalid-feedback">
-                                                    Champ requis
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="Adresse">Adresse</label>
-                                                <input type="text" placeholder="Adresse" class="form-control" id="Adresse" required />
-                                                <div class="invalid-feedback">
-                                                    Champ requis
-                                                </div>
-                                        </div> 
-                                        <div class="form-group">
-                                                <label for="Telephone">Telephone</label>
-                                                <input type="text" placeholder="Telephone" class="form-control" id="Telephone" required />
-                                                <div class="invalid-feedback">
-                                                    Champ requis
-                                                </div>
-                                        </div>  
-                                        <div class="form-group">
-                                                <label for="DateNaissance">Date de naissance</label>
-                                                <input type="date" class="form-control" id="DateNaissance" />
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="Reduction">Reduction</label>
-                                                <input type="text" placeholder="Reduction" class="form-control" id="Reduction" required />
-                                                <div class="invalid-feedback">
-                                                    Champ requis
-                                                </div>
-                                        </div>  
-                                </form>
-                
-                                <div class="actions">
-                                        <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                                        <a href="/" class="btn btn-light">Annuler</a>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-
+                <button id="myBtn" class="btn btn-primary" onclick="return AjouterParticipant();">Ajouter un participant</button>
+               
                 <div class="actions">
                     <br>
                         <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
@@ -243,17 +172,51 @@
                                 </div>
                         </div>  
                 </form>
-
-                <div class="actions">
-                        <button class="btn btn-primary" onclick="return Ajouter();">Ajouter participant</button>
-                        <a href="/" class="btn btn-light">Annuler</a>
-                </div>
+               
             </div>
             </div>
 
         </div>
         <script>
-                var dropdown = document.getElementsByClassName("dropdown-btn");
+                
+                
+                //load
+
+
+        function AppendLoadToSelect(selectIdVoyage,selectIdclient) {
+            var select = $("#" + selectIdVoyage);
+            select.empty();
+            select.append($('<option></option>'));
+            let pro = Load('voyages');//edit controller name
+            pro.then(function (values) {
+                for (item of values) {
+                    var option = $('<option></option>');
+                    option.val(item.ID);
+                    option.text(item.DestinationID + ' - ' + item.AgenceVoyageID+ ' - ' +item.DateAller+ ' - ' +item.DateRetour);//edit here          
+                    select.append(option);
+                }
+            });
+            var select2 = $("#" + selectIdclient);
+            select2.empty();
+            select2.append($('<option></option>'));
+            pro = Load('clients');//edit controller name
+            pro.then(function (values) {
+                for (item of values) {
+                    var option = $('<option></option>');
+                    option.val(item.ID);
+                    option.text(item.Nom + ' - ' + item.Prenom+ ' - ' +item.Email);//edit here          
+                    select2.append(option);
+                }
+            });
+        }
+
+
+
+        $(document).ready(function () {
+            AppendLoadToSelect('Voyage','Client');
+           
+
+            var dropdown = document.getElementsByClassName("dropdown-btn");
                 var i;
     
                 for (i = 0; i < dropdown.length; i++) {
@@ -266,28 +229,9 @@
                             dropdownContent.style.display = "block";
                         }
                     });
-                }   
+                }  
+        });
                 
-              
-                var modal = document.getElementById('myModal');
-                var btn = document.getElementById("myBtn");
-                var span = document.getElementsByClassName("close")[0];
-
-                btn.onclick = function() {
-                    modal.style.display = "block";
-                }
-
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
-
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }   
-
-
         </script>
 </body>
 </html>
