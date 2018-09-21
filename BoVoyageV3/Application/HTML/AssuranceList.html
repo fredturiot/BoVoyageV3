@@ -158,8 +158,7 @@
         }
 
         function EnregistrerModification(divItem) {
-            let idItem = divItem.data('id');
-            alert(idItem);
+            let idItem = divItem.data('id');            
             let montantItem = divItem.find('input').val();
             $.ajax({
                 type: 'PUT',
@@ -182,7 +181,7 @@
                 function RemplirDivItem(divItem, item) {
                     divItem.empty();
                     divItem.data('id', item.ID);
-                    divItem.append($('<span></span>').text(item.Montant));//change  this block
+                    divItem.append($('<span></span>').text('Forfait:'+item.ID+' Montant: '+item.Montant+'€'));//change  this block
 
                     var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
                         buttonEdit.on('click', function () {
