@@ -1,124 +1,122 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Edition de Destination</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Application/CSS/style.css" />
+    <script src="/Application/JS/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/Application/JS/Script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" />
+        crossorigin="anonymous" />
 </head>
-<body>	
-        <div class="main">
 
-                <div class="container-fluid">
-                    <h3>Edition de Destination</h3>
-    
-                    <form novalidate>
-                           
-                            <div class="form-group">
-                                    <label for="Continent">Continent</label>
-                                    <input type="text" class="form-control" id="Continent" required />
-                                    <div class="invalid-feedback">
-                                        Champ requis
-                                    </div>
-                            </div>
-    
-                            <div class="form-group">
-                                    <label for="Pays">Pays</label>
-                                    <input type="text"  class="form-control" id="Pays" required />
-                                    <div class="invalid-feedback">
-                                        Champ requis
-                                    </div>
-                            </div>
-    
-                            <div class="form-group">
-                                    <label for="Region">Regions</label>
-                                    <input type="text" class="form-control" id="Region" required />
-                                    <div class="invalid-feedback">
-                                        Champ requis
-                                    </div>
-    
-                            </div>
-    
-                             <div class="form-group">
-                                <label for="Description">Description</label>
-                                <textarea class="form-control" id="Description" rows="3"></textarea>
-                            </div>
-    
-                            
-                    </form>
-                    
-    
-                    <div class="actions">
-                            <button class="btn btn-primary" onclick="return Enregistrer(id);">Enregistrer</button>
-                            <a href="DestinationList.html" class="btn btn-light">Annuler</a>
+<body>
+    <div class="main">
+
+        <div class="container-fluid">
+            <h3>Edition de Destination</h3>
+
+            <form novalidate>
+
+                <div class="form-group">
+                    <label for="Continent">Continent</label>
+                    <input type="text" class="form-control" id="Continent" required />
+                    <div class="invalid-feedback">
+                        Champ requis
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Pays">Pays</label>
+                    <input type="text" class="form-control" id="Pays" required />
+                    <div class="invalid-feedback">
+                        Champ requis
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Region">Regions</label>
+                    <input type="text" class="form-control" id="Region" required />
+                    <div class="invalid-feedback">
+                        Champ requis
                     </div>
 
-                    
-               
-                <script>
-                $(document).ready (function(){ //change block
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">Description</label>
+                    <textarea class="form-control" id="Description" rows="3"></textarea>
+                </div>
+
+
+            </form>
+
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
+                <a href="DestinationList.html" class="btn btn-light">Annuler</a>
+            </div>
+
+
+
+            <script>
+                $(document).ready(function () { //change block
                     var id = GetURLParameter('id');
-                    var continent = GetURLParameter('continent');
-                    var pays = GetURLParameter('pays');
-                    var region = GetURLParameter('region');
-                    var description = GetURLParameter('description');
 
-                    var inputContinent=$('#Continent');
-                    inputContinent.val(continent);
-                    var inputPays=$('#Pays');
-                    inputPays.val(pays);
-                    var inputRegion=$('#region');
-                    inputRegion.val(region);
-                    var inputDescription=$('#Description');
-                    inputDescription.val(description);
-                   
+                    promise = Load('destinations', id); //edit controller name
+                    promise.then(function (item) {
+                        $('#Continent').val(item.Continent);
+                        $('#Pays').val(item.Pays);
+                        $('#Region').val(item.Region);
+                        $('#Description').val(item.Description);
+                        console.log(item);
+                    });
                 })
-                function Valider() {
-                var form = $('form');
-                let estValide = form[0].checkValidity();
-                form.addClass("was-validated");
 
-                return estValide;
+                function Valider() {
+                    var form = $('form');
+                    let estValide = form[0].checkValidity();
+                    form.addClass("was-validated");
+
+                    return estValide;
                 }
+
                 function Enregistrer(id) {
                     if (!Valider()) {
                         return false;
                     }
+                    var id = GetURLParameter('id');
 
                     let destination = { // change bloc
                         Continent: $('#Continent').val(),
-                        Pays: $('#Pays').val(), 
-                        Region: $('#Region').val(), 
-                        Description: $('#Description').val(),                 
+                        Pays: $('#Pays').val(),
+                        Region: $('#Region').val(),
+                        Description: $('#Description').val(),
+                        ID: id
                     };
 
                     $.ajax({
                         type: 'PUT',
-                        url: '/api/Destinations/'+ id,// change bloc
-                        data: destination, 
+                        url: '/api/Destinations/' + id, // change bloc
+                        data: destination,
                         success: function () {
-                            $('form')[0].reset();
-                            $('form').removeClass('was-validated');
-                            
-                            
+                            window.location.href = '/Application/HTML/DestinationList.html';
                         },
                         error: function () {
-                            alert('erreur !');
+                            Erreur(data);
                         }
                     });
 
                     return false;
                 }
-                              
-                </script>
-                
-            </div>
-        
-        
+            </script>
+
+        </div>
+
+
 </body>
+
 </html>
