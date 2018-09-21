@@ -1,23 +1,36 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace BoVoyageV3.Models
 {
 	public enum EtatDossierReservation : byte
 	{
+		[EnumMember(Value = "En Attente")]
 		EnAttente,
+
+		[EnumMember(Value = "En Cours")]
 		EnCours,
+
+		[EnumMember(Value = "Refusee")]
 		Refusee,
+
+		[EnumMember(Value = "Acceptee")]
 		Acceptee
 	}
 
 	public enum RaisonAnnulationDossier : byte
 	{
+		[EnumMember(Value = "Client")]
 		Client = 1,
+
+		[EnumMember(Value = "Places Insuffisantes")]
 		PlacesInsuffisantes
 	}
 
@@ -27,14 +40,7 @@ namespace BoVoyageV3.Models
 		public int ID { get; set; }
 
 		[NotMapped]
-		public int NumeroUnique
-		{
-			get
-			{
-				Guid guid = new Guid();
-				return guid.GetHashCode();
-			}
-		}
+		public int NumeroUnique => ID;
 
 		[Required]
 		[StringLength(20, MinimumLength = 5, ErrorMessage = "La numero de CB doit avoir de 5 a 20 caracteres")]
@@ -60,6 +66,7 @@ namespace BoVoyageV3.Models
 
 		[Required]
 		[EnumDataType(typeof(EtatDossierReservation))]
+		[JsonConverter(typeof(StringEnumConverter))]
 		public EtatDossierReservation Etat { get; set; }
 
 		public int ClientID { get; set; }
