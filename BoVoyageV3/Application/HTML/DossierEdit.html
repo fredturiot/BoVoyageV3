@@ -60,7 +60,7 @@
 
                     <div class="form-group">
                         <label for="NbParticipant">Nombre de Participants</label>
-                        <input type="number" min="1" max="9" value="1" class="form-control" id="NbParticipant" required />
+                        <input type="number" min="1" max="9" class="form-control" id="NbParticipant" required />
                         <div class="invalid-feedback">
                             Champ requis
                         </div>
@@ -110,7 +110,7 @@
                         <label class="form-check-label" for="acceptee">Acceptée</label>
                     </div>
                     <br><br>
-                    <button class="btn btn-danger" onclick="return  ValiderEtat();">Valider le changement d'état</button>
+                    <!-- <button class="btn btn-danger" onclick="return  ValiderEtat();">Valider le changement d'état</button> -->
                 </div>
 
                 <div class="form-group">
@@ -203,7 +203,7 @@
                         </div>
                     </div>
 
-                    
+
                 </form>
 
             </div>
@@ -213,8 +213,7 @@
     <script>
 
 
-        //load
-
+        //menu déroulant
 
         function AppendLoadToSelect(selectIdVoyage, selectIdclient) {
             var select = $("#" + selectIdVoyage);
@@ -242,10 +241,10 @@
                 }
             });
         }
-        function AjouterParticipant(){
+        function AjouterParticipant() {
             //ToDo
         }
-        function Modifierticipant() {
+        function ModifierParticipant() {
             //ToDo
         }
         function VerifierSolvabilite() {
@@ -258,18 +257,70 @@
             //ToDo
         }
 
-        function ValiderEtat() {
+        /* function ValiderEtat() {
             //ToDo
-        }
+        } */
         function AnnulerDossier() {
             //ToDo
         }
 
-        $(document).ready(function () { //change block
+
+            
+           
+        $(document).ready(function () { 
             var id = GetURLParameter('id');
 
+            promise = Load('DossiersReservations', id); 
+            promise.then(function (item) {
+                $('#NumeroCB').val(item.NumeroCarteBancaire);
+                $('#PrixPersonne').val(item.PrixParPersonne);
+                $('[name=Etat]:checked').val(item.Etat)
+                /* $('#Voyage').val(item.VoyageID);
+                $('#Client').val(item.ClientID); */
+                $('#NbParticipant').val(item.XXXXXXXXX);//TODO
+            });
 
-        });
+            AppendLoadToSelect('Voyage','Client');
+        })
+
+        function Valider() {
+            var form = $('form');
+            let estValide = form[0].checkValidity();
+            form.addClass("was-validated");
+
+            return estValide;
+        }
+
+        function Enregistrer(id) {
+            if (!Valider()) {
+                return false;
+            }
+            var id = GetURLParameter('id');
+
+            let dossierReservation = { 
+                NumeroCarteBancaire: $('#NumeroCB').val(),
+                PrixParPersonne: $('#PrixPersonne').val(),
+                VoyageID: $('#Voyage').val(),
+                ClientID: $('#Client').val(),
+                Etat: $('[name=Etat]:checked').val(),
+                XXXXXX: $('#NbParticipant').val()//TODO
+            };
+
+            $.ajax({
+                type: 'PUT',
+                url: '/api/DossiersReservations/' + id,
+                data: dossierReservation,
+                success: function () {
+                    window.location.href = '/Application/HTML/DossierList.html';
+                },
+                error: function (response) {
+                    Erreur(response);
+                }
+            });
+
+            return false;
+        }
+
 
 
 
