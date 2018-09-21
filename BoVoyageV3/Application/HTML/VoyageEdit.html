@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -113,7 +113,7 @@
 
                     $.ajax({
                         type: 'PUT',
-                        url: '/api/Voyages',
+                        url: '/api/Voyages/' + id,
                         data: voyage,
                         success: function () {
                             window.location.href = '/Application/HTML/VoyageList.html';
