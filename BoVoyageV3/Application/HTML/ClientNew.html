@@ -126,26 +126,28 @@
 
                 <div class="actions">
                     <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                    <a href="/" class="btn btn-light">Annuler</a>
+                    <a href="/Application/HTML/ClientList.html" class="btn btn-light">Annuler</a>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+        $(document).ready(() => {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
+            for (var i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+        });
+
         //enregistrement
         function Valider() {
             var form = $('form');
@@ -167,8 +169,7 @@
                 Adresse: $('#Adresse').val(),
                 Email: $('#Email').val(),
                 Telephone: $('#Telephone').val(),
-                DateNaissance: $('#DateNaissance').val(),
-
+                DateNaissance: $('#DateNaissance').val()
             };
 
             $.ajax({
@@ -176,20 +177,15 @@
                 url: '/api/Clients',
                 data: client,
                 success: function () {
-                    $('form')[0].reset();
-                    $('form').removeClass('was-validated');
-
+                    window.location.href = '/Application/HTML/ClientList.html';
                 },
-                error: function () {
-                    alert('erreur !');
+                error: function (response) {
+                    Erreur(response);
                 }
             });
 
             return false;
         }
-
-
-
     </script>
 </body>
 

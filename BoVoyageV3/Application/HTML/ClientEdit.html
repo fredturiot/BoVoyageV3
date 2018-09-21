@@ -71,18 +71,26 @@
 
             <div class="actions">
                 <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                <a href="/" class="btn btn-light">Annuler</a>
+                <a href="/Application/HTML/ClientList.html" class="btn btn-light">Annuler</a>
             </div>
         </div>
     </div>
-
-
-
-
     <script>
+        $(document).ready(function () { //change block
+            var id = GetURLParameter('id');
 
+            promise = Load('clients', id); //edit controller name
+            promise.then(function (item) {
+                $('#Civilite').val(item.Civilite);
+                $('#Nom').val(item.Nom);
+                $('#Prenom').val(item.Prenom);
+                $('#Adresse').val(item.Adresse);
+                $('#DateNaissance').val(item.DateNaissance.substring(0, 10));
+                $('#Telephone').val(item.Telephone);
+                $('#Email').val(item.Email);
+            });
+        })
 
-        //enregistrement
         function Valider() {
             var form = $('form');
             let estValide = form[0].checkValidity();
@@ -91,11 +99,12 @@
             return estValide;
         }
 
-        function Enregistrer() {
+        function Enregistrer(id) {
             if (!Valider()) {
                 return false;
             }
-            let id = GetURLParameter('id');
+
+            var id = GetURLParameter('id');
             let client = {
                 Civilite: $('#Civilite').val(),
                 Nom: $('#Nom').val(),
@@ -105,21 +114,19 @@
                 Telephone: $('#Telephone').val(),
                 DateNaissance: $('#DateNaissance').val(),
                 ID: id
-
             };
+
             console.log(client);
+
             $.ajax({
                 type: 'PUT',
                 url: '/api/clients/' + id,
                 data: client,
                 success: function () {
-                    $('form')[0].reset();
-                    $('form').removeClass('was-validated');
-
+                    window.location.href = '/Application/HTML/ClientList.html';
                 },
-                error: function (data) {
-                    alert('erreur !');
-                    console.log(data.responseJSON.ModelState);
+                error: function (response) {
+                    Erreur(response);
                 }
             });
 
