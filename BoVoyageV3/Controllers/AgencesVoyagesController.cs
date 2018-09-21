@@ -98,6 +98,11 @@ namespace BoVoyageV3.Controllers
 				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
 				return BadRequest(ModelState);
 			}
+			catch (DbEntityValidationException dbEx)
+			{
+				ModelState.AddModelError("Erreur", dbEx.EntityValidationErrors.ToString());
+				return BadRequest(ModelState);
+			}
 
 			return StatusCode(HttpStatusCode.NoContent);
 		}
