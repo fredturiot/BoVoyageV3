@@ -9,14 +9,7 @@ namespace BoVoyageV3.Models
 	public class Participant : Personne
 	{
 		[NotMapped]
-		public int NumeroUnique
-		{
-			get
-			{
-				Guid guid = new Guid();
-				return guid.GetHashCode();
-			}
-		}
+		public int NumeroUnique => ID;
 
 		[NotMapped]
 		public float Reduction
