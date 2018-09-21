@@ -89,7 +89,6 @@
     <Content Include="Application\HTML\AgenceEdit.html" />
     <Content Include="Application\HTML\AgenceList.html" />
     <Content Include="Application\HTML\AgenceNew.html" />
-    <Content Include="Application\HTML\AssuranceEdit.html" />
     <Content Include="Application\HTML\AssuranceList.html" />
     <Content Include="Application\HTML\AssuranceNew.html" />
     <Content Include="Application\HTML\ClientEdit.html" />

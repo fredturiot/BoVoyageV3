@@ -135,7 +135,8 @@
             var montant = label.text();
             div.data('montant', montant);//save change  this block
             div.empty();       
-            var input = $('<input type="text"/>').val(label.text());//change  this block           
+            /* var input = $('<input type="text"/>').val(label.text());  */      //change  this block           
+            var input = $('<input type="text"/>');
             div.append(input);
             input.focus();
             input.select();
@@ -196,6 +197,10 @@
                             var idItem = div.attr("data-id");
                             SupprimerItem(idItem, div);
                     });
+
+                    divItem.append(buttonDelete);
+                    divItem.append(buttonEdit);
+                    
             
         }
 
