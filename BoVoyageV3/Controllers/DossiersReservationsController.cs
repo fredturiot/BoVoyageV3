@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -69,7 +70,12 @@ namespace BoVoyageV3.Controllers
             }
 			catch (DbUpdateException ex)
 			{
-				ModelState.AddModelError("Constraint", ex.InnerException.InnerException.Message);
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message);
+				return BadRequest(ModelState);
+			}
+			catch (DbEntityValidationException dbEx)
+			{
+				ModelState.AddModelError("Erreur", dbEx.EntityValidationErrors.ToString());
 				return BadRequest(ModelState);
 			}
 
@@ -93,7 +99,12 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				ModelState.AddModelError("Constraint", ex.InnerException.InnerException.Message);
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message);
+				return BadRequest(ModelState);
+			}
+			catch (DbEntityValidationException dbEx)
+			{
+				ModelState.AddModelError("Erreur", dbEx.EntityValidationErrors.ToString());
 				return BadRequest(ModelState);
 			}
 
@@ -118,7 +129,7 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException)
 			{
-				ModelState.AddModelError("Foreign Key", "Le dossier de reservation est la foreign key de un ou plusieurs participant, veuillez les supprimer avant.");
+				ModelState.AddModelError("Erreur", "Le dossier de reservation est la foreign key de un ou plusieurs participant, veuillez les supprimer avant.");
 				return BadRequest(ModelState);
 			}
 			return Ok(dossierReservation);
