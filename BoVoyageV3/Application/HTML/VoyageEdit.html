@@ -68,7 +68,7 @@
 
 
             <div class="actions">
-                <button class="btn btn-primary" onclick="return Enregistrer(id);">Enregistrer</button>
+                <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
                 <a href="/Application/HTML/VoyageList.html" class="btn btn-light">Annuler</a>
             </div>
             <script>
@@ -97,10 +97,12 @@
                     return estValide;
                 }
 
-                function Enregistrer(id) {
+                function Enregistrer() {
                     if (!Valider()) {
                         return false;
                     }
+
+                    var id = GetURLParameter('id');
 
                     let voyage = {
                         DestinationID: $('#Destination').val(),
@@ -109,6 +111,7 @@
                         DateRetour: $('#DateRetour').val(),
                         PlacesDisponibles: $('#PlacesDisponibles').val(),
                         PrixParPersonne: $('#PrixParPersonne').val(),
+                        ID: id
                     };
 
                     $.ajax({
