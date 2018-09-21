@@ -196,8 +196,8 @@
                         Nom: nomItem
                     }); //change  this block
                 },
-                error: function (data) {
-                    Erreur(data);
+                error: function (response) {
+                    Erreur(response);
                     AnnulerModification(divItem);
                 }
             });

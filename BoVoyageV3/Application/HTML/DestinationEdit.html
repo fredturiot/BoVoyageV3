@@ -57,7 +57,7 @@
 
             <div class="actions">
                 <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                <a href="DestinationList.html" class="btn btn-light">Annuler</a>
+                <a href="/Application/HTML/DestinationList.html" class="btn btn-light">Annuler</a>
             </div>
 
 
@@ -72,7 +72,6 @@
                         $('#Pays').val(item.Pays);
                         $('#Region').val(item.Region);
                         $('#Description').val(item.Description);
-                        console.log(item);
                     });
                 })
 
@@ -105,8 +104,8 @@
                         success: function () {
                             window.location.href = '/Application/HTML/DestinationList.html';
                         },
-                        error: function () {
-                            Erreur(data);
+                        error: function (response) {
+                            Erreur(response);
                         }
                     });
 
