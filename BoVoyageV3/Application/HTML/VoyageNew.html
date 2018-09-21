@@ -134,29 +134,31 @@
 
                 <div class="actions">
                     <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                    <a href="/" class="btn btn-light">Annuler</a>
+                    <a href="/Application/HTML/VoyageList.html" class="btn btn-light">Annuler</a>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+        $(document).ready(() => {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
+            for (var i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+
+            AppendLoadToSelect('Destination','AgenceVoyage');
+        });
 
         //enregistrement
-
         function Valider() {
             var form = $('form');
             let estValide = form[0].checkValidity();
@@ -170,73 +172,58 @@
                 return false;
             }
 
-            let destination = {
-                Destination: $('#Destination').val(),
-                AgenceVoyage: $('#AgenceVoyage').val(),
+            let voyage = {
+                DestinationID: $('#Destination').val(),
+                AgenceVoyageID: $('#AgenceVoyage').val(),
                 DateAller: $('#DateAller').val(),
                 DateRetour: $('#DateRetour').val(),
                 PlacesDisponibles: $('#PlacesDisponibles').val(),
-                PrixPersonne: $('#PrixPersonne').val(),
+                PrixParPersonne: $('#PrixPersonne').val()
             };
 
             $.ajax({
                 type: 'POST',
                 url: '/api/Voyages',
-                data: destination,
+                data: voyage,
                 success: function () {
-                    $('form')[0].reset();
-                    $('form').removeClass('was-validated');
-
+                    window.location.href = '/Application/HTML/VoyageList.html';
                 },
-                error: function () {
-                    alert('erreur !');
+                error: function (response) {
+                    Erreur(response);
                 }
             });
+
             return false;
         }
 
         //load
-
-
         function AppendLoadToSelect(selectIdDest,selectIdAgence) {
-            var select = $("#" + selectIdDest);
-            select.empty();
-            select.append($('<option></option>'));
+            var selectDest = $("#" + selectIdDest);
+            selectDest.empty();
+            selectDest.append($('<option></option>'));
             let pro = Load('destinations');//edit controller name
             pro.then(function (values) {
                 for (item of values) {
                     var option = $('<option></option>');
                     option.val(item.ID);
                     option.text(item.Pays + ' - ' + item.Region);//edit here          
-                    select.append(option);
+                    selectDest.append(option);
                 }
             });
-            var select2 = $("#" + selectIdAgence);
-            select2.empty();
-            select2.append($('<option></option>'));
+
+            var selectAgence = $("#" + selectIdAgence);
+            selectAgence.empty();
+            selectAgence.append($('<option></option>'));
             pro = Load('agencesvoyages');//edit controller name
             pro.then(function (values) {
                 for (item of values) {
                     var option = $('<option></option>');
                     option.val(item.ID);
                     option.text(item.Nom);//edit here          
-                    select2.append(option);
+                    selectAgence.append(option);
                 }
             });
         }
-
-
-
-        $(document).ready(function () {
-            AppendLoadToSelect('Destination','AgenceVoyage');
-           
-        });
-
-        
-
-        
-
-
     </script>
 </body>
 

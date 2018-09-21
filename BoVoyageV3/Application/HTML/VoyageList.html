@@ -1,183 +1,167 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
-    <title>Edition de Voyage</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
-    <script src="../JS/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <title>Liste de Voyage</title>
+    <link rel="stylesheet" type="text/css" href="/Application/CSS/style.css" />
+    <script src="/Application/JS/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" />
+        crossorigin="anonymous" />
 </head>
-<body>	
-        <div class="row">
+
+<body>
+    <div class="row">
         <div class="sidenav col-lg-3 col-md-3 col-sm-8">
-                <button class="dropdown-btn">
-                    Agences
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">           
-                    <a href="AgenceNew.html">Créer Agences</a>
-                    <a href="AgenceList.html">Afficher Agences</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Assurances
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">          
-                    <a href="AssuranceNew.html">Créer Assurances</a>
-                    <a href="AssuranceList.html">Afficher Assurances</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Clients
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ClientNew.html">Créer Client</a>
-                    <a href="ClientList.html">Afficher Client</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Dossiers
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="DossierNew.html">Créer Dossier</a>
-                    <a href="DossierList.html">Afficher Dossier</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Participants
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ParticipantNew.html">Créer Participant</a>
-                    <a href="ParticipantList.html">Afficher Participant</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Voyages
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="VoyageNew.html">Créer Voyages</a>
-                    <a href="VoyageList.html">Afficher Voyages</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                        Destination
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-container">
-                        <a href="DestinationNew.html">Créer Destination</a>
-                        <a href="DestinationList.html">Afficher Destination</a>
-                    </div>
+            <button class="dropdown-btn">
+                Agences
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AgenceNew.html">Créer Agences</a>
+                <a href="AgenceList.html">Afficher Agences</a>
             </div>
 
-            <div class="main  col-lg-8 col-md-7 col-sm-8">
-                    <div class="container-fluid"> 
-                            <h4>Voyages</h4>              
-                        <div id="liste">
-                            
-                        </div>
-                 </div>
+            <button class="dropdown-btn">
+                Assurances
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AssuranceNew.html">Créer Assurances</a>
+                <a href="AssuranceList.html">Afficher Assurances</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Clients
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ClientNew.html">Créer Client</a>
+                <a href="ClientList.html">Afficher Client</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Dossiers
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DossierNew.html">Créer Dossier</a>
+                <a href="DossierList.html">Afficher Dossier</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Participants
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ParticipantNew.html">Créer Participant</a>
+                <a href="ParticipantList.html">Afficher Participant</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Voyages
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="VoyageNew.html">Créer Voyages</a>
+                <a href="VoyageList.html">Afficher Voyages</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Destination
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DestinationNew.html">Créer Destination</a>
+                <a href="DestinationList.html">Afficher Destination</a>
             </div>
         </div>
-        <script>
-                var dropdown = document.getElementsByClassName("dropdown-btn");
-                var i;
-    
-                for (i = 0; i < dropdown.length; i++) {
-                    dropdown[i].addEventListener("click", function () {
-                        this.classList.toggle("active");
-                        var dropdownContent = this.nextElementSibling;
-                        if (dropdownContent.style.display === "block") {
-                            dropdownContent.style.display = "none";
-                        } else {
-                            dropdownContent.style.display = "block";
-                        }
-                    });
-                } 
 
+        <div class="main  col-lg-8 col-md-7 col-sm-8">
+            <div class="container-fluid">
+                <h4>Voyages</h4>
+                <div id="liste">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
 
-                function getItems() {
+            for (var i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+            getItemsDetails();
+        });
+
+        function getItemsDetails() {
             $.ajax({
-                url: '/api/Voyages',//change  name here
+                url: '/api/Voyages?details=true', //change  name here
                 success: function (items) {
                     var divListeItems = $('#liste');
                     divListeItems.empty();
+
                     for (item of items) {
                         var divItem = $('<div class="item"></div>');
-                        divItem.attr("data-id", item.ID);                      
-                        //divItem.append($('<span></span>').text(item.Nom))
+                        divItem.attr("data-id", item.ID);
 
-                        divItem.append($('<label></label><br>').text("Destination: "+item.DestinationID));//change block  
-                        divItem.append($('<label></label><br>').text("Agence :"+item.AgenceVoyageID));
-                        divItem.append($('<label></label><br>').text("Aller :"+item.DateAller));
-                        divItem.append($('<label></label><br>').text("Retour :"+item.DateRetour));
-                        divItem.append($('<label></label><br>').text("Prix :"+item.PrixParPersonne));
-                        divItem.append($('<label></label>').text("Places :"+item.PlacesDisponibles));
+                        divItem.append($('<label></label><br>').text("Destination: " + item.Destination.Pays + " / " + item.Destination.Region)); //change block  
+                        divItem.append($('<label></label><br>').text("Agence :" + item.AgenceVoyage.Nom));
+                        divItem.append($('<label></label><br>').text("Aller :" + item.DateAller));
+                        divItem.append($('<label></label><br>').text("Retour :" + item.DateRetour));
+                        divItem.append($('<label></label><br>').text("Prix :" + item.PrixParPersonne));
+                        divItem.append($('<label></label>').text("Places :" + item.PlacesDisponibles));
 
                         var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
                         buttonEdit.on('click', function () {
                             var div = $(this).closest(".item");
-
-                          var idItem = div.attr("data-id");
-
-                             /*  var allLabel = div.find('label');
-                            var destinationID = allLabel[0].textContent;//change block
-                            var agenceVoyageID = allLabel[1].textContent;
-                            var dateAller = allLabel[2].textContent;
-                            var dateRetour = allLabel[3].textContent;
-                            var prixParPersonne = allLabel[4].textContent;
-                            var placesDisponibles = allLabel[5].textContent;
-
-                            
-                             */
-                            
-                            window.location = "VoyageEdit.html?id=" + idItem;//change link here
+                            var idItem = div.attr("data-id");
+                            window.location = "VoyageEdit.html?id=" + idItem; //change link here
                         });
-                        
-                        
+
                         var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
                         buttonDelete.on('click', function () {
                             var div = $(this).closest(".item");
                             var idItem = div.attr("data-id");
                             SupprimerItem(idItem, div);
                         });
-                        
-                        
-                        
+
                         divItem.append(buttonDelete);
                         divItem.append(buttonEdit);
                         divListeItems.append(divItem);
                     }
                 },
-                error: Erreur
+                error: function() {
+                    alert('Erreur');
+                }
             });
-        }        
-        
+        }
 
         function SupprimerItem(id, div) {
             $.ajax({
                 type: 'DELETE',
-                url: '/api/Voyages/' + id,//change name here
+                url: '/api/Voyages/' + id, //change name here
                 success: function () {
                     $(div).remove();
                 },
-                error: Erreur
+                error: function (data) {
+                    Erreur(data);
+                }
             });
         }
-
-        function Erreur() {
-            alert("Erreur !");
-        }
-
-        $(document).ready(getItems);                     
-            </script>
+    </script>
 </body>
+
 </html>

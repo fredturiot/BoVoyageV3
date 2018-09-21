@@ -1,124 +1,181 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Edition de Voyage</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
     <script src="../JS/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" />
+        crossorigin="anonymous" />
 </head>
-<body>	
-        <div class="main">
 
-                <div class="container-fluid">
-                    <h3>Edition de Voyage</h3>
-    
-                    <form novalidate>
+<body>
+    <div class="main">
 
-                            <div class="form-group">
-                                    <label for="Destination">Destination</label>
-                                    <select class="form-control" id="Destination" required></select>
-                                    <div class="invalid-feedback">
-                                        Champ requis
-                                    </div>
-                                </div>
-                            
-                            <div class="form-group">
-                                    <label for="AgenceVoyage">Agence de Voyage</label>
-                                    <select class="form-control" id="AgenceVoyage" required></select>
-                                    <div class="invalid-feedback">
-                                            Champ requis
-                                    </div>
-                            </div>
+        <div class="container-fluid">
+            <h3>Edition de Voyage</h3>
 
-                            <div class="form-group">
-                                    <label for="DateAller">Date Aller</label>
-                                    <input type="date" class="form-control" id="DateAller" />
-                            </div>
-                            <div class="form-group">
-                                    <label for="DateRetour">Date de retour</label>
-                                    <input type="date" class="form-control" id="DateRetour" />
-                            </div>
-    
-                            <div class="form-group">
-                                    <label for="PlacesDisponibles">Places Disponibles</label>
-                                    <input type="text" placeholder="Places Disponibles" class="form-control" id="PlacesDisponibles" required />
-                                    <div class="invalid-feedback">
-                                        Champ requis
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="PrixPersonne">Prix par personnes</label>
-                                <input type="text" placeholder="PrixPersonne" class="form-control" id="PrixPersonne" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                            </div>
-                            
-                            </div>  
-                            
-                            
-                    </form>
-                    
-    
-                    <div class="actions">
-                            <button class="btn btn-primary" onclick="return Enregistrer(id);">Enregistrer</button>
-                            <a href="DestinationList.html" class="btn btn-light">Annuler</a>
+            <form novalidate>
+
+                <div class="form-group">
+                    <label for="Destination">Destination</label>
+                    <select class="form-control" id="Destination" required></select>
+                    <div class="invalid-feedback">
+                        Champ requis
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="AgenceVoyage">Agence de Voyage</label>
+                    <select class="form-control" id="AgenceVoyage" required></select>
+                    <div class="invalid-feedback">
+                        Champ requis
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DateAller">Date Aller</label>
+                    <input type="date" class="form-control" id="DateAller" />
+                </div>
+                <div class="form-group">
+                    <label for="DateRetour">Date de retour</label>
+                    <input type="date" class="form-control" id="DateRetour" />
+                </div>
+
+                <div class="form-group">
+                    <label for="PlacesDisponibles">Places Disponibles</label>
+                    <input type="text" placeholder="Places Disponibles" class="form-control" id="PlacesDisponibles"
+                        required />
+                    <div class="invalid-feedback">
+                        Champ requis
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="PrixPersonne">Prix par personnes</label>
+                    <input type="text" placeholder="PrixParPersonne" class="form-control" id="PrixParPersonne" required />
+                    <div class="invalid-feedback">
+                        Champ requis
                     </div>
 
-                    
-               
-                <script>
+                </div>
 
-                    $(document).ready (function(){ //change block
-                    var id = GetURLParameter('id');                    
-                   
+
+            </form>
+
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="return Enregistrer(id);">Enregistrer</button>
+                <a href="/Application/HTML/VoyageList.html" class="btn btn-light">Annuler</a>
+            </div>
+
+
+
+            <script>
+                $(document).ready(function () { //change block
+                    var id = GetURLParameter('id');
+                    var destinationID;
+                    var agenceVoyageID;
+                    promise = Load('voyages', id); //edit controller name
+                    promise.then(function (item) {
+                        /* var selectDest = $('#Destination');
+                        var optionDestSelected = $('<option></option>');
+                        optionDestSelected.val(item.DestinationID);
+                        optionDestSelected.attr('selected', 'selected');
+                        selectDest.append(optionDestSelected);
+                        //option.text(item.Pays + ' - ' + item.Region);
+                        var selectAgence = $('#AgenceVoyage');
+                        var optionAgenceSelected = $('<option></option>');
+                        optionAgenceSelected.val(item.AgenceVoyageID);
+                        optionAgenceSelected.attr('selected', 'selected');
+                        selectAgence.append(optionAgenceSelected); */
+                        //option.text(item.Pays + ' - ' + item.Region);
+                        destinationID = item.DestinationID;
+                        agenceVoyageID = item.AgenceVoyageID;
+                        $('#DateAller').val(item.DateAller.substring(0, 10));
+                        $('#DateRetour').val(item.DateRetour.substring(0, 10));
+                        $('#PlacesDisponibles').val(item.PlacesDisponibles);
+                        $('#PrixParPersonne').val(item.PrixParPersonne);
+                    });
+
+                    AppendLoadToSelect('Destination', destinationID, 'AgenceVoyage', agenceVoyageID);
                 })
 
                 function Valider() {
-        var form = $('form');
-        let estValide = form[0].checkValidity();
-        form.addClass("was-validated");
+                    var form = $('form');
+                    let estValide = form[0].checkValidity();
+                    form.addClass("was-validated");
 
-        return estValide;
-        }
-
-        function Enregistrer() {
-            if (!Valider()) {
-                return false;
-            }
-
-            let destination = {
-                Destination: $('#Destination').val(),
-                AgenceVoyage: $('#AgenceVoyage').val(), 
-                DateAller: $('#DateAller').val(), 
-                DateRetour: $('#DateRetour').val(),
-                PlacesDisponibles:$('#PlacesDisponibles').val(),
-                PrixPersonne:$('#PrixPersonne').val(),                 
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: '/api/Voyages',
-                data: destination,
-                success: function () {
-                    $('form')[0].reset();
-                    $('form').removeClass('was-validated');
-                    
-                },
-                error: function () {
-                    alert('erreur !');
+                    return estValide;
                 }
-            });
 
-            return false;
-        }                     
-                </script>
-                
-            </div>
-        
+                function Enregistrer(id) {
+                    if (!Valider()) {
+                        return false;
+                    }
+
+                    let voyage = {
+                        DestinationID: $('#Destination').val(),
+                        AgenceVoyageID: $('#AgenceVoyage').val(),
+                        DateAller: $('#DateAller').val(),
+                        DateRetour: $('#DateRetour').val(),
+                        PlacesDisponibles: $('#PlacesDisponibles').val(),
+                        PrixParPersonne: $('#PrixParPersonne').val(),
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Voyages',
+                        data: voyage,
+                        success: function () {
+                            window.location.href = '/Application/HTML/VoyageList.html';
+                        },
+                        error: function (response) {
+                            Erreur(response);
+                        }
+                    });
+
+                    return false;
+                }
+
+                function AppendLoadToSelect(selectIdDest, destinationIDSelected, selectIdAgence, agenceVoyageIDSelected) {
+                    var selectDest = $("#" + selectIdDest);
+                    selectDest.empty();
+                    let pro = Load('destinations'); //edit controller name
+                    pro.then(function (values) {
+                        for (item of values) {
+                            var option = $('<option></option>');
+                            option.val(item.ID);
+                            option.text(item.Pays + ' - ' + item.Region); //edit here
+                            if (item.ID === destinationIDSelected) {
+                                option.attr('selected', 'selected');
+                            }
+                            selectDest.append(option);
+                        }
+                    });
+
+                    var selectAgence = $("#" + selectIdAgence);
+                    selectAgence.empty();
+                    pro = Load('agencesvoyages'); //edit controller name
+                    pro.then(function (values) {
+                        for (item of values) {
+                            var option = $('<option></option>');
+                            option.val(item.ID);
+                            option.text(item.Nom); //edit here
+                            if (item.ID === agenceVoyageIDSelected) {
+                                option.attr('selected', 'selected');
+                            }
+                            selectAgence.append(option);
+                        }
+                    });
+                }
+            </script>
+
+        </div>
+
 </body>
+
 </html>
