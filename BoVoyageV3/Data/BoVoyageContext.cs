@@ -15,6 +15,8 @@ namespace BoVoyageV3.Data
 		public DbSet<Destination> Destinations { get; set; }
 		public DbSet<Voyage> Voyages { get; set; }
 		public DbSet<Client> Clients { get; set; }
-
+		public DbSet<Assurance> Assurances { get; set; }
+		public DbSet<DossierReservation> DossiersReservations { get; set; }
+		public DbSet<Participant> Participants { get; set; }
 	}
 }
