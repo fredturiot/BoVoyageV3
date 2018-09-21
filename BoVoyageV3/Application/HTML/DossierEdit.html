@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Nouveau Dossier</title>
+    <title>Edition de Dossier</title>
     <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
     <script src="../JS/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -16,7 +16,6 @@
 <body>
     <div class="row">
 
-
         <div class="main  col-lg-3 col-md-6 col-sm-6">
 
             <div class="container-fluid">
@@ -27,16 +26,6 @@
                     <div class="form-group">
                         <label for="NumeroCB">Numero de Carte Bancaire</label>
                         <input type="text" placeholder="Numero de Carte Bancaire" class="form-control" id="NumeroCB"
-                            required />
-                        <div class="invalid-feedback">
-                            Champ requis
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="PrixPersonne">Prix par personnes</label>
-                        <input type="number" placeholder="Prix par Personne" class="form-control" id="PrixPersonne"
                             required />
                         <div class="invalid-feedback">
                             Champ requis
@@ -58,23 +47,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="NbParticipant">Nombre de Participants</label>
-                        <input type="number" min="1" max="9" class="form-control" id="NbParticipant" required />
-                        <div class="invalid-feedback">
-                            Champ requis
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" onclick="return ValiderNbParticipant();">valider</button>
-
                 </form>
-
-
 
                 <div class="actions">
                     <br>
                     <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                    <a href="/" class="btn btn-light">Annuler</a>
+                    <a href="/Application/HTML/DossierList.html" class="btn btn-light">Annuler</a>
                 </div>
             </div>
         </div>
@@ -93,24 +71,23 @@
                 <div class="form-group">
                     <label style="display: block;">Etat de la réservation</label>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Etat" id="enAttente" value="0">
-                        <label class="form-check-label" for="enAttente">En Attente</label>
+                        <input class="form-check-input" type="radio" name="Etat" id="En Attente" value="EnAttente">
+                        <label class="form-check-label" for="EnAttente">En Attente</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Etat" id="enCours" value="1">
+                        <input class="form-check-input" type="radio" name="Etat" id="enCours" value="enCours">
                         <label class="form-check-label" for="enCours">En Cours</label>
                     </div>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Etat" id="refusee" value="2">
-                        <label class="form-check-label" for="refusee">Refusée</label>
+                        <input class="form-check-input" type="radio" name="Etat" id="Refusee" value="Refusee">
+                        <label class="form-check-label" for="Refusee">Refusée</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Etat" id="acceptee" value="3">
-                        <label class="form-check-label" for="acceptee">Acceptée</label>
+                        <input class="form-check-input" type="radio" name="Etat" id="Acceptee" value="Acceptee">
+                        <label class="form-check-label" for="Acceptee">Acceptée</label>
                     </div>
                     <br><br>
-                    <!-- <button class="btn btn-danger" onclick="return  ValiderEtat();">Valider le changement d'état</button> -->
                 </div>
 
                 <div class="form-group">
@@ -211,33 +188,56 @@
 
     </div>
     <script>
+           $(document).ready(function () { 
+            var id = GetURLParameter('id');
+            var voyageID;
+            var clientID;
 
+            promise = Load('DossiersReservations', id); 
+            promise.then(function (item) {
+                voyageID = item.VoyageID;
+                clientID = item.ClientID;
+                $('#NumeroCB').val(item.NumeroCarteBancaire);
+                $('#PrixPersonne').val(item.PrixParPersonne);
+                console.log(item.Etat);
+                $('#' + item.Etat).attr('checked', true);
+                //$('[name=Etat]:checked').val(item.Etat)
+                /* $('#Voyage').val(item.VoyageID);
+                $('#Client').val(item.ClientID); */
+            });
+
+            AppendLoadToSelect('Voyage', voyageID, 'Client', clientID);
+        })
 
         //menu déroulant
-
-        function AppendLoadToSelect(selectIdVoyage, selectIdclient) {
-            var select = $("#" + selectIdVoyage);
-            select.empty();
-            select.append($('<option></option>'));
-            let pro = Load('voyages');//edit controller name
+        function AppendLoadToSelect(selectIdVoyage, voyageIDSelected, selectIdclient, clientIDSelected) {
+            var selectVoyage = $("#" + selectIdVoyage);
+            selectVoyage.empty();
+            let pro = Load('voyages?details=true');//edit controller name
             pro.then(function (values) {
                 for (item of values) {
                     var option = $('<option></option>');
                     option.val(item.ID);
-                    option.text('Dest: ' + item.DestinationID + ' Agence: ' + item.AgenceVoyageID + ' - ' + ' Aller: ' + item.DateAller + ' - ' + ' Retour: ' + item.DateRetour);//edit here          
-                    select.append(option);
+                    option.text(item.Destination.Pays + " / " + item.Destination.Region + ' -- ' + "Aller:"  + item.DateAller.substring(0, 10) + ' -- ' + ' Retour: ' + item.DateRetour.substring(0, 10));         
+                    if (item.ID === voyageIDSelected) {
+                        option.attr('selected', 'selected');
+                    }
+                    selectVoyage.append(option);
                 }
             });
-            var select2 = $("#" + selectIdclient);
-            select2.empty();
-            select2.append($('<option></option>'));
+
+            var selectClient = $("#" + selectIdclient);
+            selectClient.empty();
             pro = Load('clients');//edit controller name
             pro.then(function (values) {
                 for (item of values) {
                     var option = $('<option></option>');
                     option.val(item.ID);
                     option.text(item.Nom + ' ' + item.Prenom + ' - ' + item.Email);//edit here          
-                    select2.append(option);
+                    if (item.ID === clientIDSelected) {
+                        option.attr('selected', 'selected');
+                    }
+                    selectClient.append(option);
                 }
             });
         }
@@ -266,22 +266,7 @@
 
 
             
-           
-        $(document).ready(function () { 
-            var id = GetURLParameter('id');
 
-            promise = Load('DossiersReservations', id); 
-            promise.then(function (item) {
-                $('#NumeroCB').val(item.NumeroCarteBancaire);
-                $('#PrixPersonne').val(item.PrixParPersonne);
-                $('[name=Etat]:checked').val(item.Etat)
-                /* $('#Voyage').val(item.VoyageID);
-                $('#Client').val(item.ClientID); */
-                $('#NbParticipant').val(item.XXXXXXXXX);//TODO
-            });
-
-            AppendLoadToSelect('Voyage','Client');
-        })
 
         function Valider() {
             var form = $('form');

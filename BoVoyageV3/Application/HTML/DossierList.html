@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Edition de Dossier</title>
+    <title>Liste de Dossier</title>
     <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
     <script src="../JS/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -73,54 +73,54 @@
 
         <div class="main  col-lg-8 col-md-7 col-sm-8">
             <div class="container-fluid">
-                <h4>Reservations</h4>
+                <h4>Dossiers Reservations</h4>
                 <div id="liste">
-
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+        $(document).ready(() => {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-
-
+            for (var i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+            getItems();
+        });
 
         function getItems() {
             $.ajax({
-                url: '/api/DossiersReservations',//change  name here
+                url: '/api/DossiersReservations', //change  name here
                 success: function (items) {
                     var divListeItems = $('#liste');
                     divListeItems.empty();
                     for (item of items) {
                         var divItem = $('<div class="item"></div>');
-                        divItem.attr("data-id", item.ID);                      
+                        divItem.attr("data-id", item.ID);
 
-                        divItem.append($('<label></label><br>').text("ID Client: " + item.ClientID));//change block  
-                        divItem.append($('<label></label><br>').text("ID Voyage :" + item.VoyageID));
-                        divItem.append($('<label></label>').text("Prix Total :" + item.PrixTotal+"€"));
-      
-                        
+                        divItem.append($('<label></label><br>').text("ID Client: " + item.ClientID)); //change block  
+                        divItem.append($('<label></label><br>').text("ID Voyage : " + item.VoyageID));
+                        divItem.append($('<label></label><br>').text("Numero Unique : " + item.NumeroUnique));
+                        divItem.append($('<label></label><br>').text("N° CB : " + item.NumeroCarteBancaire));
+                        divItem.append($('<label></label><br>').text("PrixParPersonne : " + item.PrixParPersonne +
+                            "€"));
+                        divItem.append($('<label></label>').text("Prix Total : " + item.PrixTotal + "€"));
+
                         var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
                         buttonEdit.on('click', function () {
                             var div = $(this).closest(".item");
                             var idItem = div.attr("data-id");
-
-                            window.location = "DossierEdit.html?id=" + idItem;//change link here
+                            window.location = "DossierEdit.html?id=" + idItem; //change link here
                         });
-
 
                         var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
                         buttonDelete.on('click', function () {
@@ -129,34 +129,29 @@
                             SupprimerItem(idItem, div);
                         });
 
-
-
                         divItem.append(buttonDelete);
                         divItem.append(buttonEdit);
                         divListeItems.append(divItem);
                     }
                 },
-                error: Erreur
+                error: function () {
+                    alert('Erreur');
+                }
             });
         }
-
 
         function SupprimerItem(id, div) {
             $.ajax({
                 type: 'DELETE',
-                url: '/api/DossiersReservations/' + id,//change name here
+                url: '/api/DossiersReservations/' + id, //change name here
                 success: function () {
                     $(div).remove();
                 },
-                error: Erreur
+                error: function (response) {
+                    Erreur(response);
+                }
             });
         }
-
-        function Erreur() {
-            alert("Erreur !");
-        }
-
-        $(document).ready(getItems);                     
     </script>
 
 </body>

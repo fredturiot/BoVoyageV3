@@ -1,254 +1,267 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Nouveau Dossier</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css" />
     <script src="../JS/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous" />
-</head>
-<body>	
-        <div class="row">
-        <div class="sidenav col-lg-2 col-md-3 col-sm-8">
-                <button class="dropdown-btn">
-                    Agences
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">           
-                    <a href="AgenceNew.html">Créer Agences</a>
-                    <a href="AgenceList.html">Afficher Agences</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Assurances
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">          
-                    <a href="AssuranceNew.html">Créer Assurances</a>
-                    <a href="AssuranceList.html">Afficher Assurances</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Clients
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ClientNew.html">Créer Client</a>
-                    <a href="ClientList.html">Afficher Client</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Dossiers
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="DossierNew.html">Créer Dossier</a>
-                    <a href="DossierList.html">Afficher Dossier</a>
-                </div>
 
-        
-                <button class="dropdown-btn">
-                    Voyages
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="VoyageNew.html">Créer Voyages</a>
-                    <a href="VoyageList.html">Afficher Voyages</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                        Destination
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-container">
-                        <a href="DestinationNew.html">Créer Destination</a>
-                        <a href="DestinationList.html">Afficher Destination</a>
-                    </div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="sidenav col-lg-2 col-md-3 col-sm-8">
+            <button class="dropdown-btn">
+                Agences
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AgenceNew.html">Créer Agences</a>
+                <a href="AgenceList.html">Afficher Agences</a>
             </div>
-            
+
+            <button class="dropdown-btn">
+                Assurances
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="AssuranceNew.html">Créer Assurances</a>
+                <a href="AssuranceList.html">Afficher Assurances</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Clients
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="ClientNew.html">Créer Client</a>
+                <a href="ClientList.html">Afficher Client</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Dossiers
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DossierNew.html">Créer Dossier</a>
+                <a href="DossierList.html">Afficher Dossier</a>
+            </div>
+
+
+            <button class="dropdown-btn">
+                Voyages
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="VoyageNew.html">Créer Voyages</a>
+                <a href="VoyageList.html">Afficher Voyages</a>
+            </div>
+
+            <button class="dropdown-btn">
+                Destination
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="DestinationNew.html">Créer Destination</a>
+                <a href="DestinationList.html">Afficher Destination</a>
+            </div>
+        </div>
+
         <div class="main">
 
             <div class="container-fluid">
-                <h3>Nouveau Dossier</h3>
+                <h3>Nouveau Dossier Reservation</h3>
 
-               <form novalidate>
-                       
-                        <div class="form-group">
-                                <label for="NumeroCB">Numero de Carte Bancaire</label>
-                                <input type="text" placeholder="Numero de Carte Bancaire" class="form-control" id="NumeroCB" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
-                        </div>
-           
+                <form novalidate>
 
-                        <div class="form-group">
-                                <label for="PrixPersonne">Prix par personnes</label>
-                                <input type="number" placeholder="Prix par Personne" class="form-control" id="PrixPersonne" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>   
+                    <div class="form-group">
+                        <label for="NumeroCB">Numero de Carte Bancaire</label>
+                        <input type="text" placeholder="Numero de Carte Bancaire" class="form-control" id="NumeroCB"
+                            required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                                <label for="Voyage">Voyage</label>
-                                <select class="form-control" id="Voyage" required></select>
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
+                    <div class="form-group">
+                        <label for="Voyage">Voyage</label>
+                        <select class="form-control" id="Voyage" required></select>
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        <div class="form-group">
-                                <label for="Client">Client</label>
-                                <select class="form-control" id="Client" required></select>
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Client">Client</label>
+                        <select class="form-control" id="Client" required></select>
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                                <label for="NbParticipant">Nombre de Participants</label>
-                                <input type="number" min="1" max="9" value="1" class="form-control" id="NbParticipant" required/>
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
+                    <!-- <div class="form-group">
+                        <label for="NbParticipant">Nombre de Participants</label>
+                        <input type="number" min="1" max="9" value="1" class="form-control" id="NbParticipant" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        <button class="btn btn-primary" onclick="return ValiderNbParticipant();">valider</button>
-                                              
+                    </div>
+                    <button class="btn btn-primary" onclick="return ValiderNbParticipant();">valider</button> -->
+
                 </form>
-                            
-                
-               
+
                 <div class="actions">
                     <br>
-                        <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
-                        <a href="/" class="btn btn-light">Annuler</a>
+                    <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
+                    <a href="/Application/HTML/DossierList.html" class="btn btn-light">Annuler</a>
                 </div>
             </div>
         </div>
 
         <div class="main">
-        <div class="container-fluid">
+            <div class="container-fluid">
                 <h3>Nouveau Participant</h3>
 
                 <form novalidate>
-                        <div class="form-group">
-                                <label for="Civilite">Civilité</label>
-                                <input type="text" placeholder="Civilité" class="form-control" id="Civilite" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
+                    <div class="form-group">
+                        <label for="Civilite">Civilité</label>
+                        <input type="text" placeholder="Civilité" class="form-control" id="Civilite" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        <div class="form-group">
-                            <label for="Nom">Nom</label>
-                            <input type="text" placeholder="Nom" class="form-control" id="Nom" required />
-                            <div class="invalid-feedback">
-                                Champ requis
+                    </div>
+                    <div class="form-group">
+                        <label for="Nom">Nom</label>
+                        <input type="text" placeholder="Nom" class="form-control" id="Nom" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Prenom">Prenom</label>
+                        <input type="text" placeholder="Prenom" class="form-control" id="Prenom" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        <div class="form-group">
-                                <label for="Prenom">Prenom</label>
-                                <input type="text" placeholder="Prenom" class="form-control" id="Prenom" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Adresse">Adresse</label>
+                        <input type="text" placeholder="Adresse" class="form-control" id="Adresse" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        <div class="form-group">
-                                <label for="Adresse">Adresse</label>
-                                <input type="text" placeholder="Adresse" class="form-control" id="Adresse" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
-                        </div> 
-                        <div class="form-group">
-                                <label for="Telephone">Telephone</label>
-                                <input type="text" placeholder="Telephone" class="form-control" id="Telephone" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
-                        </div>  
-                        <div class="form-group">
-                                <label for="DateNaissance">Date de naissance</label>
-                                <input type="date" class="form-control" id="DateNaissance" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Telephone">Telephone</label>
+                        <input type="text" placeholder="Telephone" class="form-control" id="Telephone" required />
+                        <div class="invalid-feedback">
+                            Champ requis
                         </div>
-                        <div class="form-group">
-                                <label for="Reduction">Reduction</label>
-                                <input type="text" placeholder="Reduction" class="form-control" id="Reduction" required />
-                                <div class="invalid-feedback">
-                                    Champ requis
-                                </div>
-                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label for="DateNaissance">Date de naissance</label>
+                        <input type="date" class="form-control" id="DateNaissance" />
+                    </div>
 
-                        <button class="btn btn-primary" onclick="return AjouterParticipant();">Ajouter ce participant</button>
+                    <button class="btn btn-primary" onclick="return AjouterParticipant();">Ajouter ce participant</button>
                 </form>
-               
-            </div>
-            </div>
 
+            </div>
         </div>
-        <script>
-                
-                
-                //load
 
+    </div>
+    <script>
+        $(document).ready(function () {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
 
-        function AppendLoadToSelect(selectIdVoyage,selectIdclient) {
-            var select = $("#" + selectIdVoyage);
-            select.empty();
-            select.append($('<option></option>'));
-            let pro = Load('voyages');//edit controller name
-            pro.then(function (values) {
-                for (item of values) {
-                    var option = $('<option></option>');
-                    option.val(item.ID);                   
-                    option.text('Dest: '+item.DestinationID + ' Agence: ' + item.AgenceVoyageID+ ' - ' +' Aller: '+item.DateAller+ ' - ' +' Retour: '+item.DateRetour);//edit here          
-                    select.append(option);
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+
+            AppendLoadToSelect('Voyage', 'Client');
+        });
+
+        //enregistrement
+        function Valider() {
+            var form = $('form');
+            let estValide = form[0].checkValidity();
+            form.addClass("was-validated");
+
+            return estValide;
+        }
+
+        function Enregistrer() {
+            if (!Valider()) {
+                return false;
+            }
+
+            let dossier = {
+                ClientID: $('#Client').val(),
+                VoyageID: $('#Voyage').val(),
+                NumeroCarteBancaire: $('#NumeroCB').val(),
+                Etat: "EnAttente"
+            };
+
+            console.log(dossier);
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/DossiersReservations',
+                data: dossier,
+                success: function () {
+                    window.location.href = '/Application/HTML/DossierList.html';
+                },
+                error: function (response) {
+                    Erreur(response);
                 }
             });
-            var select2 = $("#" + selectIdclient);
-            select2.empty();
-            select2.append($('<option></option>'));
-            pro = Load('clients');//edit controller name
+
+            return false;
+        }
+
+        function AppendLoadToSelect(selectIdVoyage, selectIdclient) {
+            var selectVoyage = $("#" + selectIdVoyage);
+            selectVoyage.empty();
+            selectVoyage.append($('<option></option>'));
+            let pro = Load('voyages?details=true'); //edit controller name
             pro.then(function (values) {
                 for (item of values) {
                     var option = $('<option></option>');
                     option.val(item.ID);
-                    option.text(item.Nom + ' ' + item.Prenom+ ' - ' +item.Email);//edit here          
-                    select2.append(option);
+                    option.text('Dest: ' + item.Destination.Pays + ' / ' + item.Destination.Region + ' -- ' +
+                        ' Aller: ' + item.DateAller.substring(0, 10) + ' -- ' + ' Retour: ' + item.DateRetour
+                        .substring(0, 10)); //edit here          
+                    selectVoyage.append(option);
+                }
+            });
+
+            var selectClient = $("#" + selectIdclient);
+            selectClient.empty();
+            selectClient.append($('<option></option>'));
+            pro = Load('clients'); //edit controller name
+            pro.then(function (values) {
+                for (item of values) {
+                    var option = $('<option></option>');
+                    option.val(item.ID);
+                    option.text(item.Nom + ' ' + item.Prenom + ' - ' + item.Email); //edit here          
+                    selectClient.append(option);
                 }
             });
         }
-
-        function AjouterParticipant(){
-            //ToDo
-        }
-       
-
-
-
-        $(document).ready(function () {
-            AppendLoadToSelect('Voyage','Client');
-           
-
-            var dropdown = document.getElementsByClassName("dropdown-btn");
-                var i;
-    
-                for (i = 0; i < dropdown.length; i++) {
-                    dropdown[i].addEventListener("click", function () {
-                        this.classList.toggle("active");
-                        var dropdownContent = this.nextElementSibling;
-                        if (dropdownContent.style.display === "block") {
-                            dropdownContent.style.display = "none";
-                        } else {
-                            dropdownContent.style.display = "block";
-                        }
-                    });
-                }  
-        });
-                
-        </script>
+    </script>
 </body>
+
 </html>
