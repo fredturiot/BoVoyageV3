@@ -191,8 +191,8 @@
             pro.then(function (values) {
                 for (item of values) {
                     var option = $('<option></option>');
-                    option.val(item.ID);
-                    option.text(item.DestinationID + ' - ' + item.AgenceVoyageID+ ' - ' +item.DateAller+ ' - ' +item.DateRetour);//edit here          
+                    option.val(item.ID);                   
+                    option.text('Dest: '+item.DestinationID + ' Agence: ' + item.AgenceVoyageID+ ' - ' +' Aller: '+item.DateAller+ ' - ' +' Retour: '+item.DateRetour);//edit here          
                     select.append(option);
                 }
             });
@@ -204,10 +204,14 @@
                 for (item of values) {
                     var option = $('<option></option>');
                     option.val(item.ID);
-                    option.text(item.Nom + ' - ' + item.Prenom+ ' - ' +item.Email);//edit here          
+                    option.text(item.Nom + ' ' + item.Prenom+ ' - ' +item.Email);//edit here          
                     select2.append(option);
                 }
             });
+        }
+
+        function AjouterParticipant(){
+            //ToDo
         }
 
 

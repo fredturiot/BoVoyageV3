@@ -72,7 +72,7 @@ namespace BoVoyageV3.Models
 		[ForeignKey("VoyageID")]
 		public Voyage Voyage { get; set; }
 
-		public virtual ICollection<Assurance> Assurances { get; set; }
+		public ICollection<Assurance> Assurances { get; set; }
 
 		public ICollection<Participant> Participants { get; set; }
 	}
