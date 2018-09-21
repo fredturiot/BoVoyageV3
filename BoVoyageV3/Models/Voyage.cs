@@ -37,5 +37,7 @@ namespace BoVoyageV3.Models
 
 		[ForeignKey("DestinationID")]
 		public Destination Destination { get; set; }
+
+		public ICollection<DossierReservation> DossiersReservations { get; set; }
 	}
 }

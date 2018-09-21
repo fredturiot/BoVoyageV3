@@ -120,8 +120,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AgencesVoyagesController.cs" />
+    <Compile Include="Controllers\AssurancesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DestinationsController.cs" />
+    <Compile Include="Controllers\DossiersReservationsController.cs" />
+    <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\VoyagesController.cs" />
     <Compile Include="Data\BoVoyageContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -135,10 +138,25 @@
     <Compile Include="Migrations\201809201432393_Clients.Designer.cs">
       <DependentUpon>201809201432393_Clients.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809210835061_Assurances.cs" />
+    <Compile Include="Migrations\201809210835061_Assurances.Designer.cs">
+      <DependentUpon>201809210835061_Assurances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809210848315_DossierReservations.cs" />
+    <Compile Include="Migrations\201809210848315_DossierReservations.Designer.cs">
+      <DependentUpon>201809210848315_DossierReservations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809210918427_Participants.cs" />
+    <Compile Include="Migrations\201809210918427_Participants.Designer.cs">
+      <DependentUpon>201809210918427_Participants.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
+    <Compile Include="Models\Assurance.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Destination.cs" />
+    <Compile Include="Models\DossierReservation.cs" />
+    <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\Personne.cs" />
     <Compile Include="Models\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,6 +179,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809201432393_Clients.resx">
       <DependentUpon>201809201432393_Clients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809210835061_Assurances.resx">
+      <DependentUpon>201809210835061_Assurances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809210848315_DossierReservations.resx">
+      <DependentUpon>201809210848315_DossierReservations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809210918427_Participants.resx">
+      <DependentUpon>201809210918427_Participants.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
