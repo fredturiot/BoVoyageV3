@@ -2,6 +2,7 @@ namespace BoVoyageV3.Migrations
 {
 	using BoVoyageV3.Models;
 	using System;
+	using System.Collections.Generic;
 	using System.Data.Entity;
 	using System.Data.Entity.Migrations;
 	using System.Linq;
@@ -47,7 +48,86 @@ namespace BoVoyageV3.Migrations
 			context.Clients.AddOrUpdate(x => x.ID,
 				new Client() { ID = 1, Civilite = "Madame", Nom = "Chirac", Prenom = "Elisabeth", Adresse = "3 rue des casseroles", Telephone = "01.02.03.04.05", DateNaissance = DateTime.Parse("1955/02/24"), Email = "elisabeth.chirac@france.fr" },
 				new Client() { ID = 2, Civilite = "Monsieur", Nom = "Bush", Prenom = "Gerard", Adresse = "3 rue de Bagdad", Telephone = "06.66.66.66.66", DateNaissance = DateTime.Parse("1980/09/01"), Email = "gerad.bush@usa.us" }
-);
+			);
+
+			context.Assurances.AddOrUpdate(x => x.ID,
+				new Assurance() { ID = 1, Montant = 100.0m, Type = TypeAssurance.Annulation },
+				new Assurance() { ID = 2, Montant = 200.0m, Type = TypeAssurance.Annulation }
+			);
+
+			//Assurance assurance100 = new Assurance() { ID = 1, Montant = 100.0m, Type = TypeAssurance.Annulation };
+			//Assurance assurance200 = new Assurance() { ID = 2, Montant = 200.0m, Type = TypeAssurance.Annulation };
+
+			//List<Assurance> assurances = new List<Assurance>
+			//{
+			//	assurance100,
+			//	assurance200
+			//};
+
+			context.DossiersReservations.AddOrUpdate(x => x.ID,
+				new DossierReservation() { ID = 1, ClientID = 2, VoyageID = 3, NumeroCarteBancaire = "123456789", Etat = EtatDossierReservation.EnAttente },
+				new DossierReservation()
+				{
+					ID = 2,
+					ClientID = 1,
+					VoyageID = 8,
+					NumeroCarteBancaire = "777777777",
+					Etat = EtatDossierReservation.EnAttente,
+					//Assurances = {
+					//	new Assurance() { ID = 1, Montant = 100.0m, Type = TypeAssurance.Annulation },
+					//	new Assurance() { ID = 2, Montant = 200.0m, Type = TypeAssurance.Annulation }
+
+					//}
+				}
+			);
+
+			context.Participants.AddOrUpdate(x => x.ID,
+				new Participant()
+				{
+					ID = 1,
+					Civilite = "Mademoiselle", Nom = "Chirac", Prenom = "Fatima",
+					Adresse = "3 rue des casseroles",
+					Telephone = "01.02.03.04.05",
+					DateNaissance = DateTime.Parse("1990/02/24"),
+					DossierReservationID = 1
+				},
+				new Participant()
+				{
+					ID = 2,
+					Civilite = "Mademoiselle", Nom = "Chirac", Prenom = "Murielle",
+					Adresse = "3 rue des casseroles",
+					Telephone = "01.02.03.04.05",
+					DateNaissance = DateTime.Parse("2018/09/01"),
+					DossierReservationID = 1
+				},
+				new Participant()
+				{
+					ID = 3,
+					Civilite = "Monsieur", Nom = "Chirac", Prenom = "Babakar",
+					Adresse = "3 rue des casseroles",
+					Telephone = "01.02.03.04.05",
+					DateNaissance = DateTime.Parse("1985/02/11"),
+					DossierReservationID = 1
+				},
+				new Participant()
+				{
+					ID = 4,
+					Civilite = "Monsieur", Nom = "Bush", Prenom = "Barack",
+					Adresse = "1 rue de la paix",
+					Telephone = "01.02.03.04.05",
+					DateNaissance = DateTime.Parse("2000/02/24"),
+					DossierReservationID = 2
+				},
+				new Participant()
+				{
+					ID = 5,
+					Civilite = "Madame", Nom = "Bush", Prenom = "Clinton",
+					Adresse = "1 rue de la paix",
+					Telephone = "01.02.03.04.05",
+					DateNaissance = DateTime.Parse("2018/02/24"),
+					DossierReservationID = 2
+				}
+			);
 		}
 	}
 }
