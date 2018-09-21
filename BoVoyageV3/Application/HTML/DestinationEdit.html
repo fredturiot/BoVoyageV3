@@ -21,7 +21,7 @@
                            
                             <div class="form-group">
                                     <label for="Continent">Continent</label>
-                                    <input type="text" value=continent class="form-control" id="Continent" required />
+                                    <input id="continent" type="text" class="form-control" id="Continent" required />
                                     <div class="invalid-feedback">
                                         Champ requis
                                     </div>
@@ -66,6 +66,9 @@
                     var continent = GetURLParameter('continent');
                     var pays = GetURLParameter('pays');
                     var region = GetURLParameter('region');
+
+                    var inputContinent=$('#continent');
+                    inputContinent.val(continent);
                    
                 })
                 function Valider() {

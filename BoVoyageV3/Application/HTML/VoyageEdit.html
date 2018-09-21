@@ -12,85 +12,111 @@
           crossorigin="anonymous" />
 </head>
 <body>	
-        <div class="sidenav col-lg-3 col-md-3 col-sm-8">
-                <button class="dropdown-btn">
-                    Agences
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">           
-                    <a href="AgenceNew.html">Créer Agences</a>
-                    <a href="AgenceList.html">Afficher Agences</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Assurances
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">          
-                    <a href="AssuranceNew.html">Créer Assurances</a>
-                    <a href="AssuranceList.html">Afficher Assurances</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Clients
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ClientNew.html">Créer Client</a>
-                    <a href="ClientList.html">Afficher Client</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Dossiers
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="DossierNew.html">Créer Dossier</a>
-                    <a href="DossierList.html">Afficher Dossier</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Participants
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="ParticipantNew.html">Créer Participant</a>
-                    <a href="ParticipantList.html">Afficher Participant</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                    Voyages
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="VoyageNew.html">Créer Voyages</a>
-                    <a href="VoyageList.html">Afficher Voyages</a>
-                </div>
-        
-                <button class="dropdown-btn">
-                        Destination
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-container">
-                        <a href="DestinationNew.html">Créer Destination</a>
-                        <a href="DestinationList.html">Afficher Destination</a>
-                    </div>
-            </div>
-        <script>
-                var dropdown = document.getElementsByClassName("dropdown-btn");
-                var i;
+        <div class="main">
+
+                <div class="container-fluid">
+                    <h3>Edition de Voyage</h3>
     
-                for (i = 0; i < dropdown.length; i++) {
-                    dropdown[i].addEventListener("click", function () {
-                        this.classList.toggle("active");
-                        var dropdownContent = this.nextElementSibling;
-                        if (dropdownContent.style.display === "block") {
-                            dropdownContent.style.display = "none";
-                        } else {
-                            dropdownContent.style.display = "block";
+                    <form novalidate>
+
+                            <div class="form-group">
+                                    <label for="Destination">Destination</label>
+                                    <select class="form-control" id="Destination" required></select>
+                                    <div class="invalid-feedback">
+                                        Champ requis
+                                    </div>
+                                </div>
+                            
+                            <div class="form-group">
+                                    <label for="AgenceVoyage">Agence de Voyage</label>
+                                    <select class="form-control" id="AgenceVoyage" required></select>
+                                    <div class="invalid-feedback">
+                                            Champ requis
+                                    </div>
+                            </div>
+    
+                            <div class="form-group">
+                                    <label for="PlacesDisponibles">Places Disponibles</label>
+                                    <input type="text" placeholder="Places Disponibles" class="form-control" id="PlacesDisponibles" required />
+                                    <div class="invalid-feedback">
+                                        Champ requis
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="PrixPersonne">Prix par personnes</label>
+                                <input type="text" placeholder="PrixPersonne" class="form-control" id="PrixPersonne" required />
+                                <div class="invalid-feedback">
+                                    Champ requis
+                            </div>
+                            
+                            </div>  
+                            <div class="form-group">
+                                    <label for="DateAller">Date Aller</label>
+                                    <input type="date" class="form-control" id="DateAller" />
+                            </div>
+                            <div class="form-group">
+                                    <label for="DateRetour">Date de retour</label>
+                                    <input type="date" class="form-control" id="DateRetour" />
+                            </div>
+                            
+                    </form>
+                    
+    
+                    <div class="actions">
+                            <button class="btn btn-primary" onclick="return Enregistrer(id);">Enregistrer</button>
+                            <a href="DestinationList.html" class="btn btn-light">Annuler</a>
+                    </div>
+
+                    
+               
+                <script>
+                $(document).ready (function(){ //change block
+                    var id = GetURLParameter('id');
+                    var Destination= GetURLParameter('continent');
+                    var pays = GetURLParameter('pays');
+                    var region = GetURLParameter('region');
+                   
+                })
+                function Valider() {
+                var form = $('form');
+                let estValide = form[0].checkValidity();
+                form.addClass("was-validated");
+
+                return estValide;
+                }
+                function Enregistrer(id) {
+                    if (!Valider()) {
+                        return false;
+                    }
+
+                    let destination = { // change bloc
+                        Continent: $('#Continent').val(),
+                        Pays: $('#Pays').val(), 
+                        Region: $('#Region').val(), 
+                        Description: $('#Description').val(),                 
+                    };
+
+                    $.ajax({
+                        type: 'PUT',
+                        url: '/api/Destinations/'+ id,// change bloc
+                        data: destination, 
+                        success: function () {
+                            $('form')[0].reset();
+                            $('form').removeClass('was-validated');
+                            
+                            
+                        },
+                        error: function () {
+                            alert('erreur !');
                         }
                     });
-                }                      
-            </script>
+
+                    return false;
+                }
+                              
+                </script>
+                
+            </div>
+        
 </body>
 </html>

@@ -16,7 +16,7 @@ function GetURLParameter(sParam)
 	 }
     }
 
-function LoadAjaxData() {
+/* function LoadAjaxData() {
     var searchString = $('#searchString').val();
     $.ajax(
         {
@@ -32,7 +32,7 @@ function LoadAjaxData() {
         }
         )
 }
-
+ */
 
 
 

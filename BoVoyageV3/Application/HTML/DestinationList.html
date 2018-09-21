@@ -79,7 +79,7 @@
                         <a href="DestinationList.html">Afficher Destination</a>
                     </div>
             </div>
-
+        
             <div class="main  col-lg-8 col-md-7 col-sm-8">
                     <div class="container-fluid"> 
                             <h4>Destinations</h4>              
@@ -88,7 +88,7 @@
                         </div>
                  </div>
             </div>
-        </div>
+        
     </div>
 
         <script>
@@ -119,9 +119,9 @@
                         divItem.attr("data-id", item.ID);//change block                      
                         //divItem.append($('<span></span>').text(item.Nom))
 
-                        divItem.append($('<label></label>').text(item.Continent + "---"));//change block  
-                        divItem.append($('<label></label>').text(item.Pays+ "---"));
-                        divItem.append($('<label></label><br>').text(item.Region));
+                        divItem.append($('<label></label> <br>').text(item.Continent));//change block  
+                        divItem.append($('<label></label> <br>').text(item.Pays));
+                        divItem.append($('<label></label> <br>').text(item.Region));
                         divItem.append($('<label></label>').text(item.Description));
 
                         var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
