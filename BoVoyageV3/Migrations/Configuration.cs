@@ -11,7 +11,7 @@ namespace BoVoyageV3.Migrations
 	{
 		public Configuration()
 		{
-			AutomaticMigrationsEnabled = false;
+			AutomaticMigrationsEnabled = true;
 		}
 
 		protected override void Seed(BoVoyageV3.Data.BoVoyageContext context)
