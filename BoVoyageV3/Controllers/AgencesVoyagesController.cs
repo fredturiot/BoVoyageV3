@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -94,7 +95,7 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
 				return BadRequest(ModelState);
 			}
 
@@ -118,7 +119,12 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				ModelState.AddModelError("Unique Constraint", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				return BadRequest(ModelState);
+			}
+			catch (DbEntityValidationException dbEx)
+			{
+				ModelState.AddModelError("Erreur", dbEx.EntityValidationErrors.ToString());
 				return BadRequest(ModelState);
 			}
 
@@ -143,7 +149,7 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException)
 			{
-				ModelState.AddModelError("Foreign Key", "L'agence est la foreign key de un ou plusieurs voyage, veuillez les supprimer avant.");
+				ModelState.AddModelError("Erreur", "L'agence est la foreign key de un ou plusieurs voyage, veuillez les supprimer avant.");
 				return BadRequest(ModelState);
 			}
 
