@@ -105,6 +105,10 @@
                                 </div>
                         </div>
                         <div class="form-group">
+                                <label for="DateNaissance">Date de naissance</label>
+                                <input type="date" class="form-control" id="DateNaissance" />
+                        </div>
+                        <div class="form-group">
                                 <label for="Adresse">Adresse</label>
                                 <input type="text" placeholder="Adresse" class="form-control" id="Adresse" required />
                                 <div class="invalid-feedback">
@@ -117,14 +121,10 @@
                                 <div class="invalid-feedback">
                                     Champ requis
                                 </div>
-                        </div>  
+                        </div>                 
                         <div class="form-group">
-                                <label for="DateNaissance">Date de naissance</label>
-                                <input type="date" class="form-control" id="DateNaissance" />
-                        </div>
-                        <div class="form-group">
-                                <label for="EMail">Courrier électronique</label>
-                                <input type="text" placeholder="Email@mail.com" class="form-control" id="E-mail" required />
+                                <label for="Email">Courrier électronique</label>
+                                <input type="text" placeholder="Email@mail.com" class="form-control" id="Email" required />
                                 <div class="invalid-feedback">
                                     Champ requis
                                 </div>
@@ -152,7 +152,51 @@
                             dropdownContent.style.display = "block";
                         }
                     });
-                }                      
-            </script>
+                }    
+         //enregistrement
+         function Valider() {
+        var form = $('form');
+        let estValide = form[0].checkValidity();
+        form.addClass("was-validated");
+
+        return estValide;
+        }
+
+        function Enregistrer() {
+            if (!Valider()) {
+                return false;
+            }
+
+            let client = {
+                Civilite: $('#Civilite').val(),
+                Nom: $('#Nom').val(), 
+                Prenom: $('#Prenom').val(), 
+                Adresse: $('#Adresse').val(),
+                Email: $('#Email').val(),  
+                Telephone: $('#Telephone').val(),
+                DateNaissance: $('#DateNaissance').val(),
+
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Clients',
+                data: client,
+                success: function () {
+                    $('form')[0].reset();
+                    $('form').removeClass('was-validated');
+                    
+                },
+                error: function () {
+                    alert('erreur !');
+                }
+            });
+
+            return false;
+        }                   
+               
+                
+
+        </script>
 </body>
 </html>

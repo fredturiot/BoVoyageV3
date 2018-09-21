@@ -77,6 +77,14 @@
                         <a href="DestinationList.html">Afficher Destination</a>
                     </div>
             </div>
+            <div class="main  col-lg-8 col-md-7 col-sm-8">
+                    <div class="container-fluid"> 
+                            <h4>Clients</h4>              
+                        <div id="liste">
+                            
+                        </div>
+                 </div>
+            </div>
         </div>
         <script>
                 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -92,7 +100,80 @@
                             dropdownContent.style.display = "block";
                         }
                     });
-                }                      
+                }      
+                
+                
+                function getItems() {
+            $.ajax({
+                url: '/api/Clients',//change  name here
+                success: function (items) {
+                    var divListeItems = $('#liste');
+                    divListeItems.empty();
+                    for (item of items) {
+                        var divItem = $('<div class="item"></div>');
+                        divItem.attr("data-id", item.ID);//change block                      
+                        //divItem.append($('<span></span>').text(item.Nom))
+
+                        divItem.append($('<label></label> <br>').text(item.Civilite));//change block  
+                        divItem.append($('<label></label> <br>').text(item.Nom));
+                        divItem.append($('<label></label> <br>').text(item.Prenom));
+                        divItem.append($('<label></label> <br>').text(item.Adresse));
+                        divItem.append($('<label></label> <br>').text(item.Telephone));
+                        divItem.append($('<label></label> <br>').text(item.Email));
+                        divItem.append($('<label></label> <br>').text(item.DateNaissance));
+                        divItem.append($('<label></label>').text(item.Age));
+
+                        var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
+                        buttonEdit.on('click', function () {
+                            var div = $(this).closest(".item");
+
+                            /* var idItem = div.attr("data-id");
+                            var allLabel = div.find('label');
+                            var continent = allLabel[0].textContent;//change block
+                            var pays = allLabel[1].textContent;
+                            var region = allLabel[2].textContent;
+                            var description = allLabel[3].textContent; */
+
+                                                  
+                            window.location = "ClientEdit.html?id=" + idItem;//change link here
+                        });
+                        
+                        
+                        var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".item");
+                            var idItem = div.attr("data-id");
+                            SupprimerItem(idItem, div);
+                        });
+                        
+                        
+                        
+                        divItem.append(buttonDelete);
+                        divItem.append(buttonEdit);
+                        divListeItems.append(divItem);
+                    }
+                },
+                error: Erreur
+            });
+        }        
+        
+
+        function SupprimerItem(id, div) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/Clients/' + id,//change name here
+                success: function () {
+                    $(div).remove();
+                },
+                error: Erreur
+            });
+        }
+
+        function Erreur() {
+            alert("Erreur !");
+        }
+
+        $(document).ready(getItems);
             </script>
 </body>
 </html>

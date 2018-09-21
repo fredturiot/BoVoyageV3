@@ -21,7 +21,7 @@
                            
                             <div class="form-group">
                                     <label for="Continent">Continent</label>
-                                    <input id="continent" type="text" class="form-control" id="Continent" required />
+                                    <input type="text" class="form-control" id="Continent" required />
                                     <div class="invalid-feedback">
                                         Champ requis
                                     </div>
@@ -29,7 +29,7 @@
     
                             <div class="form-group">
                                     <label for="Pays">Pays</label>
-                                    <input type="text" value=pays class="form-control" id="Pays" required />
+                                    <input type="text"  class="form-control" id="Pays" required />
                                     <div class="invalid-feedback">
                                         Champ requis
                                     </div>
@@ -37,7 +37,7 @@
     
                             <div class="form-group">
                                     <label for="Region">Regions</label>
-                                    <input type="text" value=region class="form-control" id="Region" required />
+                                    <input type="text" class="form-control" id="Region" required />
                                     <div class="invalid-feedback">
                                         Champ requis
                                     </div>
@@ -46,7 +46,7 @@
     
                              <div class="form-group">
                                 <label for="Description">Description</label>
-                                <textarea value="Description..." class="form-control" id="Description" rows="3"></textarea>
+                                <textarea class="form-control" id="Description" rows="3"></textarea>
                             </div>
     
                             
@@ -66,9 +66,16 @@
                     var continent = GetURLParameter('continent');
                     var pays = GetURLParameter('pays');
                     var region = GetURLParameter('region');
+                    var description = GetURLParameter('description');
 
-                    var inputContinent=$('#continent');
+                    var inputContinent=$('#Continent');
                     inputContinent.val(continent);
+                    var inputPays=$('#Pays');
+                    inputPays.val(pays);
+                    var inputRegion=$('#region');
+                    inputRegion.val(region);
+                    var inputDescription=$('#Description');
+                    inputDescription.val(description);
                    
                 })
                 function Valider() {

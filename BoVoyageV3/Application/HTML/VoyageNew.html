@@ -90,7 +90,7 @@
                                 <div class="invalid-feedback">
                                     Champ requis
                                 </div>
-                            </div>
+                        </div>
                         
                         <div class="form-group">
                                     <label for="AgenceVoyage">Agence de Voyage</label>
@@ -98,14 +98,24 @@
                                     <div class="invalid-feedback">
                                         Champ requis
                                     </div>
-                             </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label for="DateAller">Date Aller</label>
+                                <input type="date" class="form-control" id="DateAller" />
+                        </div>
+                        <div class="form-group">
+                                <label for="DateRetour">Date de retour</label>
+                                <input type="date" class="form-control" id="DateRetour" />
+                        </div>
+                    
 
                         <div class="form-group">
                                 <label for="PlacesDisponibles">Places Disponibles</label>
                                 <input type="text" placeholder="Places Disponibles" class="form-control" id="PlacesDisponibles" required />
                                 <div class="invalid-feedback">
                                     Champ requis
-                                </div>
+                        </div>
                         </div>
                         <div class="form-group">
                             <label for="PrixPersonne">Prix par personnes</label>
@@ -115,14 +125,7 @@
                         </div>
                         
                         </div>  
-                        <div class="form-group">
-                                <label for="DateAller">Date Aller</label>
-                                <input type="date" class="form-control" id="DateAller" />
-                        </div>
-                        <div class="form-group">
-                                <label for="DateRetour">Date de retour</label>
-                                <input type="date" class="form-control" id="DateRetour" />
-                        </div>
+                        
                         
                 </form>
 
@@ -147,7 +150,47 @@
                             dropdownContent.style.display = "block";
                         }
                     });
-                }                      
+                }     
+                
+                //enregistrement
+            function Valider() {
+        var form = $('form');
+        let estValide = form[0].checkValidity();
+        form.addClass("was-validated");
+
+        return estValide;
+        }
+
+        function Enregistrer() {
+            if (!Valider()) {
+                return false;
+            }
+
+            let destination = {
+                Destination: $('#Destination').val(),
+                AgenceVoyage: $('#AgenceVoyage').val(), 
+                DateAller: $('#DateAller').val(), 
+                DateRetour: $('#DateRetour').val(),
+                PlacesDisponibles:$('#PlacesDisponibles').val(),
+                PrixPersonne:$('#PrixPersonne').val(),                 
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Voyages',
+                data: destination,
+                success: function () {
+                    $('form')[0].reset();
+                    $('form').removeClass('was-validated');
+                    
+                },
+                error: function () {
+                    alert('erreur !');
+                }
+            });
+
+            return false;
+        }                   
             </script>
 </body>
 </html>
