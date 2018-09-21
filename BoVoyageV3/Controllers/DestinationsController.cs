@@ -86,7 +86,7 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message);
 				return BadRequest(ModelState);
 			}
 			catch (DbEntityValidationException dbEx)
@@ -115,7 +115,7 @@ namespace BoVoyageV3.Controllers
 			}
 			catch (DbUpdateException ex)
 			{
-				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message.Split('.')[2].TrimStart());
+				ModelState.AddModelError("Erreur", ex.InnerException.InnerException.Message);
 				return BadRequest(ModelState);
 			}
 			catch (DbEntityValidationException dbEx)
