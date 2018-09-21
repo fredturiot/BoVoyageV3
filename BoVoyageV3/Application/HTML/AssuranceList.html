@@ -71,38 +71,44 @@
             </div>
         </div>
         <div class="main  col-lg-8 col-md-7 col-sm-8">
-                <div class="container-fluid"> 
-                        <h4>Assurances</h4>              
-                    <div id="liste">
-                    </div>
+            <div class="container-fluid">
+                <h4>Assurances</h4>
+                <div id="liste">
                 </div>
             </div>
+        </div>
     </div>
     <script>
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+        $(document).ready(() => {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }   
+            for (var i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+            getItems();
+        });
+
         function getItems() {
             $.ajax({
-                url: '/api/Assurances',//change  name here
+                url: '/api/Assurances', //change  name here
                 success: function (items) {
                     var divListeItems = $('#liste');
                     divListeItems.empty();
+
                     for (item of items) {
                         var divItem = $('<div class="item"></div>');
                         divItem.attr("data-id", item.ID);
-                        //divItem.append($('<span></span>').text(item.Nom))
+
+                        divItem.append($('<label></label>').text('Forfait:' + item.Type + ' Montant (€): '));
+                        divItem.append($('<label class="MontantAssurance"></label>').text(item.Montant));
 
                         var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
                         buttonEdit.on('click', function () {
@@ -110,33 +116,33 @@
                             var idItem = div.attr("data-id");
                             Modifier($(this));
                         });
-                        
-                        
+
+
                         var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
                         buttonDelete.on('click', function () {
                             var div = $(this).closest(".item");
                             var idItem = div.attr("data-id");
                             SupprimerItem(idItem, div);
                         });
-                        
-                        
-                        divItem.append($('<label></label>').text('Forfait:'+item.ID+' Montant: '+item.Montant+'€'));
+
                         divItem.append(buttonDelete);
                         divItem.append(buttonEdit);
                         divListeItems.append(divItem);
                     }
                 },
-                error: Erreur
+                error: function () {
+                    alert('Erreur');
+                }
             });
         }
+
         function Modifier(bouton) {
             var div = bouton.closest('.item');
-            var label = div.find('label');
+            var label = div.find('.MontantAssurance');
             var montant = label.text();
-            div.data('montant', montant);//save change  this block
-            div.empty();       
-            /* var input = $('<input type="text"/>').val(label.text());  */      //change  this block           
-            var input = $('<input type="text"/>');
+            div.data('montant', montant); //save change  this block
+            div.empty();
+            var input = $('<input type="text"/>').val(montant);
             div.append(input);
             input.focus();
             input.select();
@@ -152,74 +158,80 @@
                 }
             });
         }
-        function AnnulerModification(divItem) {//change  this block
+
+        function AnnulerModification(divItem) { //change  this block
             let idItem = divItem.data('id');
-            let montantItem = divItem.data('montant'); 
-            RemplirDivItem(divItem, { ID: idItem, Montant: montantItem });
+            let montantItem = divItem.data('montant');
+            RemplirDivItem(divItem, {
+                ID: idItem,
+                Type: 1,
+                Montant: montantItem
+            });
         }
 
         function EnregistrerModification(divItem) {
-            let idItem = divItem.data('id');            
+            let idItem = divItem.data('id');
             let montantItem = divItem.find('input').val();
             $.ajax({
                 type: 'PUT',
-                url: '/api/Assurances/' + idItem,//change  name here
+                url: '/api/Assurances/' + idItem, //change  name here
                 data: {
                     ID: idItem,
-                    Type:1,
-                    Montant: montantItem//change  this block
+                    Type: "Annulation",
+                    Montant: montantItem //change  this block
                 },
                 success: function () {
-                    
-                    RemplirDivItem(divItem, { ID: idItem, Montant: montantItem });//change  this block
+
+                    RemplirDivItem(divItem, {
+                        ID: idItem,
+                        Type: "Annulation",
+                        Montant: montantItem
+                    }); //change  this block
                 },
-                error: function (erreur) {
-                    alert(erreur);
+                error: function (response) {
+                    Erreur(response);
+                    AnnulerModification(divItem);
                 }
             });
         }
 
-                function RemplirDivItem(divItem, item) {
-                    divItem.empty();
-                    divItem.data('id', item.ID);
-                    divItem.append($('<span></span>').text('Forfait:'+item.ID+' Montant: '+item.Montant+'€'));//change  this block
+        function RemplirDivItem(divItem, item) {
+            divItem.empty();
+            divItem.data('id', item.ID);
 
-                    var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
-                        buttonEdit.on('click', function () {
-                            var div = $(this).closest(".item");
-                            var idItem = div.attr("data-id");
-                            Modifier($(this));
-                    });                     
-                        
-                    var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
-                        buttonDelete.on('click', function () {
-                            var div = $(this).closest(".item");
-                            var idItem = div.attr("data-id");
-                            SupprimerItem(idItem, div);
-                    });
+            divItem.append($('<label></label>').text('Forfait:' + item.Type + ' Montant (€): '));
+            divItem.append($('<label class="MontantAssurance"></label>').text(item.Montant));
 
-                    divItem.append(buttonDelete);
-                    divItem.append(buttonEdit);
-                    
-            
+            var buttonEdit = $('<button class="btn btn-light btn-sm custom">Edit</button>');
+            buttonEdit.on('click', function () {
+                var div = $(this).closest(".item");
+                var idItem = div.attr("data-id");
+                Modifier($(this));
+            });
+
+            var buttonDelete = $('<button class="btn btn-danger btn-sm custom">Delete</button>');
+            buttonDelete.on('click', function () {
+                var div = $(this).closest(".item");
+                var idItem = div.attr("data-id");
+                SupprimerItem(idItem, div);
+            });
+
+            divItem.append(buttonDelete);
+            divItem.append(buttonEdit);
         }
 
         function SupprimerItem(id, div) {
             $.ajax({
                 type: 'DELETE',
-                url: '/api/Assurances/' + id,//change name here
+                url: '/api/Assurances/' + id, //change name here
                 success: function () {
                     $(div).remove();
                 },
-                error: Erreur
+                error: function (response) {
+                    Erreur(response);
+                }
             });
         }
-
-        function Erreur() {
-            alert("Erreur !");
-        }
-
-        $(document).ready(getItems);                   
     </script>
 </body>
 
